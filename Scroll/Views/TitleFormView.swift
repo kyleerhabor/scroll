@@ -21,8 +21,12 @@ struct TitleFormView: View {
     Form {
       HStack {
         VStack {
+          let width: CGFloat = 128
+
           TitleCoverView(cover: cover)
-            .frame(width: 128, height: 128 * (4 / 3))
+            .frame(width: width, height: titleCoverHeight(from: width))
+            .clipped()
+            .cornerRadius(4)
 
           Button {
             importingFile = true
