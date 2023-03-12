@@ -95,7 +95,7 @@ struct TitleFormView: View {
       }
     }
     .padding()
-    .navigationTitle("New Title")
+    .navigationTitle(object == nil ? "New Title" : "Edit Title")
     .onAppear {
       guard let obj = object else {
         return
