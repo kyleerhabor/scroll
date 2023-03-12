@@ -17,7 +17,7 @@ extension View {
 }
 
 func titleCoverHeight(from width: CGFloat) -> CGFloat {
-  width * (4 / 3)
+  width * (3 / 2)
 }
 
 struct TableLabeledContentStyle: LabeledContentStyle {
