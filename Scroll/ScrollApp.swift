@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct ScrollApp: App {
-  let persistenceController = PersistenceController.shared
+  private let persistenceController = PersistenceController.shared
 
   var body: some Scene {
     let viewContext = persistenceController.container.viewContext
@@ -17,6 +17,13 @@ struct ScrollApp: App {
     WindowGroup {
       ContentView()
         .environment(\.managedObjectContext, viewContext)
+    }.commands {
+      CommandGroup(after: .newItem) {
+        Section {
+          CreateTitleButtonView()
+            .keyboardShortcut("n", modifiers: [.command, .shift, .option])
+        }
+      }
     }
 
     WindowGroup(id: "title-form", for: Title.ID.self) { id in // Why is id a binding?

@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct TitleView: View {
-  @Environment(\.openWindow) private var openWindow
+  @Environment(\.managedObjectContext) private var viewContext
 
   private(set) var title: Title
 
+  @State private var isPresentingDeletePrompt = false
+
   var body: some View {
-    let name = title.title!
+    let name = title.title ?? "..."
 
     ScrollView {
       VStack(alignment: .leading, spacing: 12) {
@@ -56,11 +58,8 @@ struct TitleView: View {
     .navigationSubtitle(name)
     #endif
     .toolbar {
-      Button {
-        openWindow(id: "title-form", value: title.id)
-      } label: {
-        Label("Edit", systemImage: "pencil")
-      }
+      EditTitleButtonView(id: title.id)
+      DeleteTitleButtonView(title: title)
     }
   }
 }

@@ -1,5 +1,5 @@
 //
-//  Views.swift
+//  View.swift
 //  Scroll
 //
 //  Created by Kyle Erhabor on 3/10/23.

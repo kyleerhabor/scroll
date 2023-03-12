@@ -9,10 +9,9 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-  @Environment(\.managedObjectContext) private var viewContext
-  @Environment(\.openWindow) private var openWindow
-
   // New titles should appear first.
+  //
+  // For some reason, creating a title adds it to the end.
   @FetchRequest(sortDescriptors: [.init(keyPath: \NSManagedObject.objectID, ascending: false)])
   private var titles: FetchedResults<Title>
 
@@ -48,11 +47,8 @@ struct ContentView: View {
             .frame(width: width)
             .buttonStyle(.plain)
             .contextMenu {
-              Button {
-                openWindow(id: "title-form", value: title.id)
-              } label: {
-                Label("Edit", systemImage: "pencil")
-              }
+              // It's kind of awkward to repeat "Title" at the end.
+              EditTitleButtonView(id: title.id)
             }
           }
         }.padding()
@@ -63,11 +59,7 @@ struct ContentView: View {
       }.toolbar {
         // In the future, I'd like to provide users the ability to create or *import* titles (likely in some file format).
         // When that happens, this will likely be a Menu.
-        Button {
-          openWindow(id: "title-form")
-        } label: {
-          Label("Create", systemImage: "plus")
-        }
+        CreateTitleButtonView()
       }
     }
   }
