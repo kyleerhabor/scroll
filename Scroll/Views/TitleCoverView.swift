@@ -13,6 +13,8 @@ struct TitleCoverView: View {
   var body: some View {
     if let data = cover,
        let image = NSImage(data: data) {
+      // Maybe replace with an AsyncImage? Large images can block the UI. Could recommend users to not upload large
+      // images, but that kind of sucks.
       Image(nsImage: image)
         .resizable()
         .scaledToFill()

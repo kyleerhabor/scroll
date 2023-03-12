@@ -12,15 +12,16 @@ struct ScrollApp: App {
   let persistenceController = PersistenceController.shared
 
   var body: some Scene {
+    let viewContext = persistenceController.container.viewContext
+
     WindowGroup {
       ContentView()
-        .environment(\.managedObjectContext, persistenceController.container.viewContext)
+        .environment(\.managedObjectContext, viewContext)
     }
 
-    // Maybe accept a title object? Would allow it to be pre-filled
-    WindowGroup(id: "new-title") {
-      TitleFormView()
-        .environment(\.managedObjectContext, persistenceController.container.viewContext)
+    WindowGroup(id: "title-form", for: Title.ID.self) { id in // Why is id a binding?
+      TitleFormView(id: id)
+        .environment(\.managedObjectContext, viewContext)
     }
   }
 }

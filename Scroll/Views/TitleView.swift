@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TitleView: View {
+  @Environment(\.openWindow) private var openWindow
+
   private(set) var title: Title
 
   var body: some View {
@@ -20,9 +22,8 @@ struct TitleView: View {
 
           VStack {
             TitleCoverView(cover: title.cover)
-              .frame(height: titleCoverHeight(from: width))
-              .clipped()
-              .cornerRadius(4)
+              .frame(width: width, height: titleCoverHeight(from: width))
+              .titleCoverStyle()
 
 //            VStack(spacing: 4) {
 //              LabeledContent("Title", value: name)
@@ -56,7 +57,7 @@ struct TitleView: View {
     #endif
     .toolbar {
       Button {
-        print("...")
+        openWindow(id: "title-form", value: title.id)
       } label: {
         Label("Edit", systemImage: "pencil")
       }

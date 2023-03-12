@@ -26,12 +26,11 @@ struct ContentView: View {
             NavigationLink(value: title) {
               // For some reason, the blue outline (highlight) is taller than the actual view.
               //
-              // The default spacing is a bit much, and so is 4; but 2 is a bit too short. 3 looks "fine".
+              // The default spacing is a bit much; 4 is too much, and 2 is a bit too short. 3 looks "fine".
               VStack(alignment: .leading, spacing: 3) {
                 TitleCoverView(cover: title.cover)
                   .frame(width: width, height: titleCoverHeight(from: width))
-                  .clipped()
-                  .cornerRadius(4)
+                  .titleCoverStyle()
 
                 let name = title.title!
 
@@ -45,7 +44,16 @@ struct ContentView: View {
                   .lineLimit(2, reservesSpace: true)
                   .help(name)
               }
-            }.buttonStyle(.plain)
+            }
+            .frame(width: width)
+            .buttonStyle(.plain)
+            .contextMenu {
+              Button {
+                openWindow(id: "title-form", value: title.id)
+              } label: {
+                Label("Edit", systemImage: "pencil")
+              }
+            }
           }
         }.padding()
       }
@@ -56,7 +64,7 @@ struct ContentView: View {
         // In the future, I'd like to provide users the ability to create or *import* titles (likely in some file format).
         // When that happens, this will likely be a Menu.
         Button {
-          openWindow(id: "new-title")
+          openWindow(id: "title-form")
         } label: {
           Label("Create", systemImage: "plus")
         }

@@ -11,9 +11,19 @@ struct TitleFormView: View {
   @Environment(\.managedObjectContext) private var viewContext
   @Environment(\.dismiss) private var dismiss
 
+  @Binding private(set) var id: Title.ID?
   @State private(set) var title = ""
   @State private(set) var cover: Data?
   @State private(set) var description: String = ""
+
+  private var object: Title? {
+    guard let id,
+          let id = viewContext.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: id) else {
+      return nil
+    }
+
+    return try? (viewContext.existingObject(with: id) as! Title)
+  }
 
   @State private var importingFile = false
 
@@ -25,8 +35,7 @@ struct TitleFormView: View {
 
           TitleCoverView(cover: cover)
             .frame(width: width, height: titleCoverHeight(from: width))
-            .clipped()
-            .cornerRadius(4)
+            .titleCoverStyle()
 
           Button {
             importingFile = true
@@ -38,6 +47,14 @@ struct TitleFormView: View {
             }
 
             cover = try? Data(contentsOf: img)
+          }
+
+          if cover != nil {
+            Button(role: .cancel) {
+              cover = nil
+            } label: {
+              Text("Remove")
+            }
           }
 
           Text("2 x 3 dimensions")
@@ -67,8 +84,8 @@ struct TitleFormView: View {
           dismiss()
         }
 
-        Button("Create") {
-          create()
+        Button(object == nil ? "Create" : "Update") {
+          submit()
           dismiss()
         }
         // I'd like to toggle between a regular and prominent button style, but the text does not toggle colors fast
@@ -79,14 +96,26 @@ struct TitleFormView: View {
     }
     .padding()
     .navigationTitle("New Title")
+    .onAppear {
+      guard let obj = object else {
+        return
+      }
+
+      title = obj.title!
+      cover = obj.cover
+
+      if let desc = obj.desc {
+        description = desc
+      }
+    }
   }
 
   func isComplete() -> Bool {
     !title.isEmpty
   }
 
-  func create() {
-    let ttl = Title(context: viewContext)
+  func submit() {
+    let ttl = object ?? Title(context: viewContext)
     ttl.title = title
 
     if !description.isEmpty {
@@ -106,6 +135,7 @@ struct TitleFormView: View {
 struct TitleFormView_Previews: PreviewProvider {
   static var previews: some View {
     TitleFormView(
+      id: .constant(nil),
       title: "Crest of the Stars",
       description: "In the distant future, humanity is under attack by the Abh Empire, a race of advanced humanoid beings possessing vastly superior technology. As countless worlds fall to the Abh, mankind establishes the Four Nations Alliance—a resistance faction made up of the United Mankind, the Republic of Greater Alcont, the Federation of Hania, and the People's Sovereign of Union Planets.\n\nCrest of the Stars tells the story of Jinto Linn. When he was young, his father—the president of Martine—sold their world in exchange for a high position in the empire. Now a young count, Jinto must learn the ways of Abh nobility and live among those who subjugated his people. Helping him is Lafiel Abriel, an austere Abh princess whom Jinto quickly befriends. While traveling to Jinto's new school in the Abh homeland, their ship is caught in a violent space battle between the fleets of the Alliance and the Abh. Jinto and Abriel are thrust into the conflict, unaware that this skirmish marks the beginning of a full-scale war between the Abh Empire and mankind."
     )

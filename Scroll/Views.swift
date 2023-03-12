@@ -8,6 +8,14 @@
 import Foundation
 import SwiftUI
 
+let titleCoverCornerRadius: CGFloat = 4
+
+extension View {
+  func titleCoverStyle() -> some View {
+    clipped().cornerRadius(titleCoverCornerRadius)
+  }
+}
+
 func titleCoverHeight(from width: CGFloat) -> CGFloat {
   width * (4 / 3)
 }

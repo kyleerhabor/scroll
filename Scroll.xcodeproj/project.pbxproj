@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0063764C29BA954B001EBA44 /* TitleCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063764B29BA954B001EBA44 /* TitleCoverView.swift */; };
 		0063765329BC1E03001EBA44 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063765229BC1E03001EBA44 /* Views.swift */; };
+		0063765529BD931C001EBA44 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063765429BD931C001EBA44 /* Model.swift */; };
 		0082BFC529B41AC300C35E79 /* ScrollApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFC429B41AC300C35E79 /* ScrollApp.swift */; };
 		0082BFC729B41AC300C35E79 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFC629B41AC300C35E79 /* Persistence.swift */; };
 		0082BFCA29B41AC300C35E79 /* Scroll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFC829B41AC300C35E79 /* Scroll.xcdatamodeld */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		0063764B29BA954B001EBA44 /* TitleCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCoverView.swift; sourceTree = "<group>"; };
 		0063765229BC1E03001EBA44 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
+		0063765429BD931C001EBA44 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		0082BFC129B41AC300C35E79 /* Scroll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scroll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0082BFC429B41AC300C35E79 /* ScrollApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollApp.swift; sourceTree = "<group>"; };
 		0082BFC629B41AC300C35E79 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				0082BFC429B41AC300C35E79 /* ScrollApp.swift */,
 				0082BFC629B41AC300C35E79 /* Persistence.swift */,
 				0082BFCB29B41AC300C35E79 /* ContentView.swift */,
+				0063765429BD931C001EBA44 /* Model.swift */,
 				0063765229BC1E03001EBA44 /* Views.swift */,
 				00DC480A29B7CDD400CAB1AB /* Views */,
 				0082BFCD29B41AC500C35E79 /* Assets.xcassets */,
@@ -287,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0063765529BD931C001EBA44 /* Model.swift in Sources */,
 				0063764C29BA954B001EBA44 /* TitleCoverView.swift in Sources */,
 				00DC480C29B7CDEF00CAB1AB /* TitleFormView.swift in Sources */,
 				0082BFC529B41AC300C35E79 /* ScrollApp.swift in Sources */,
