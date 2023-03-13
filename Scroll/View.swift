@@ -35,3 +35,7 @@ struct TableLabeledContentStyle: LabeledContentStyle {
 extension LabeledContentStyle where Self == TableLabeledContentStyle {
   static var table: TableLabeledContentStyle { .init() }
 }
+
+enum FormPurpose {
+  case create, edit
+}

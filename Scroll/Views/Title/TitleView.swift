@@ -28,7 +28,7 @@ struct TitleView: View {
               .titleCoverStyle()
 
 //            VStack(spacing: 4) {
-//              LabeledContent("Title", value: name)
+//
 //            }
           }
           .frame(width: width)
@@ -48,7 +48,25 @@ struct TitleView: View {
 
         Divider()
 
-        // Display contents here?
+        let contents = title.contentsArray
+
+        if !contents.isEmpty {
+          Text("Contents")
+            .font(.title2)
+            .fontWeight(.medium)
+
+          let width: CGFloat = 64
+
+          LazyVGrid(columns: [.init(.adaptive(minimum: width))], alignment: .leading) {
+            ForEach(title.contentsArray) { content in
+              GroupBox {
+                Text(content.title!)
+              }
+            }
+
+            // On iOS, I imagine adding a translucent accented button with the text and icon vertical.
+          }
+        }
       }.padding()
     }
     // Looks better.
@@ -60,6 +78,12 @@ struct TitleView: View {
     .toolbar {
       EditTitleButtonView(id: title.id)
       DeleteTitleButtonView(title: title)
+
+      Menu {
+        CreateContentButtonView(titleId: title.id)
+      } label: {
+        Label("Add", systemImage: "plus")
+      }
     }
   }
 }

@@ -17,13 +17,14 @@ struct ContentView: View {
 
   var body: some View {
     NavigationStack {
+      // Maybe a generic list should be used? But that may look worse... Maybe just on screens that are smaller? (iOS)
       ScrollView {
         let width: CGFloat = 128
 
         LazyVGrid(columns: [.init(.adaptive(minimum: width))]) {
           ForEach(titles) { title in
             NavigationLink(value: title) {
-              // For some reason, the blue outline (highlight) is taller than the actual view.
+              // For some reason, the blue outline (highlight) is sometimes wider than the view by a variable amount.
               //
               // The default spacing is a bit much; 4 is too much, and 2 is a bit too short. 3 looks "fine".
               VStack(alignment: .leading, spacing: 3) {

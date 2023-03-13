@@ -26,9 +26,33 @@ struct ScrollApp: App {
       }
     }
 
-    WindowGroup(id: "title-form", for: Title.ID.self) { id in // Why is id a binding?
-      TitleFormView(id: id)
+    WindowGroup("Create Title", id: "create-title-form") {
+      CreateTitleFormView()
         .environment(\.managedObjectContext, viewContext)
+    }
+
+    // For views where the ID is nil (seems to be from restoration not being possible; don't know how), I'd like to show
+    // a default search view (or maybe just a not found page, but that would be awkward).
+
+    WindowGroup("Edit Title", id: "edit-title-form", for: Title.ID.self) { $id in
+      if let id {
+        EditTitleFormView(id: id)
+          .environment(\.managedObjectContext, viewContext)
+      }
+    }
+
+    WindowGroup("Create Content", id: "create-content-form", for: Title.ID.self) { $id in
+      if let id {
+        CreateContentFormView(titleId: id)
+          .environment(\.managedObjectContext, viewContext)
+      }
+    }
+
+    WindowGroup("Edit Content", id: "edit-content-form", for: Content.ID.self) { $id in
+      if id != nil {
+        // TODO: Implement.
+        Text("...")
+      }
     }
   }
 }

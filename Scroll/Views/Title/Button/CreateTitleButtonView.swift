@@ -12,7 +12,7 @@ struct CreateTitleButtonView: View {
 
   var body: some View {
     Button {
-      openWindow(id: "title-form")
+      openWindow(id: "create-title-form")
     } label: {
       Label("Create Title", systemImage: "plus")
     }

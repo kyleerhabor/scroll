@@ -14,7 +14,7 @@ struct EditTitleButtonView: View {
 
   var body: some View {
     Button {
-      openWindow(id: "title-form", value: id)
+      openWindow(id: "edit-title-form", value: id)
     } label: {
       Label("Edit Title", systemImage: "pencil")
     }

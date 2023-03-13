@@ -16,6 +16,7 @@ struct TitleCoverView: View {
       // It would maybe be nice to use an AsyncImage here to not block the UI, but I can't convert Data to URL.
       Image(nsImage: image)
         .resizable()
+        .interpolation(.high) // Maybe leave this out? But some high-quality covers may look choppier without...
         .scaledToFill()
     } else {
       Color.secondary

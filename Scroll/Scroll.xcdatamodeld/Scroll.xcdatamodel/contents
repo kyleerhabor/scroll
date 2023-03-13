@@ -7,7 +7,7 @@
     <entity name="Title" representedClassName="Title" syncable="YES" codeGenerationType="class">
         <attribute name="cover" optional="YES" attributeType="Binary"/>
         <attribute name="desc" optional="YES" attributeType="String"/>
-        <attribute name="title" optional="YES" attributeType="String" minValueString="1"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="contents" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Content" inverseName="titleRef" inverseEntity="Content"/>
     </entity>
 </model>
