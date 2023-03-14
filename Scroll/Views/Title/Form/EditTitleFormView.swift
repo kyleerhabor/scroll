@@ -26,7 +26,7 @@ struct EditTitleFormView: View {
       submit: submit,
       cancel: dismiss.callAsFunction
     ).onAppear {
-      let ttl = getTitle(from: id)
+      let ttl = getTitle()
       title = ttl.title!
       cover = ttl.cover
 
@@ -36,14 +36,12 @@ struct EditTitleFormView: View {
     }.alert("Could not create title.", isPresented: $didError) {}
   }
 
-  func getTitle(from id: Title.ID) -> Title {
-    let id = viewContext.persistentStoreCoordinator!.managedObjectID(forURIRepresentation: id)!
-
-    return try! (viewContext.existingObject(with: id) as! Title)
+  func getTitle() -> Title {
+    PersistenceController.getObject(from: id, with: viewContext) as! Title
   }
 
   func submit() {
-    let ttl = getTitle(from: id)
+    let ttl = getTitle()
     ttl.title = title
     ttl.desc = description.isEmpty ? nil : description
     ttl.cover = cover
@@ -62,6 +60,6 @@ struct EditTitleFormView: View {
 
 struct EditTitleFormView_Previews: PreviewProvider {
   static var previews: some View {
-    EditTitleFormView(id: .init(string: "/dev/null")!)
+    EditTitleFormView(id: .nullDevice)
   }
 }

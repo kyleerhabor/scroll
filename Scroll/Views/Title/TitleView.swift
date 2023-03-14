@@ -55,12 +55,14 @@ struct TitleView: View {
             .font(.title2)
             .fontWeight(.medium)
 
-          let width: CGFloat = 64
+          let width: CGFloat = 128
 
           LazyVGrid(columns: [.init(.adaptive(minimum: width))], alignment: .leading) {
             ForEach(title.contentsArray) { content in
               GroupBox {
                 Text(content.title!)
+              }.contextMenu {
+                EditContentButtonView(id: content.id)
               }
             }
 

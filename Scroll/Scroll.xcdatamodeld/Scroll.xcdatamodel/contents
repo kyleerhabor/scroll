@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Chapter" representedClassName="Chapter" syncable="YES" codeGenerationType="class">
+        <attribute name="pages" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="content" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Content" inverseName="chapter" inverseEntity="Content"/>
+    </entity>
     <entity name="Content" representedClassName="Content" syncable="YES" codeGenerationType="class">
         <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="chapter" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Chapter" inverseName="content" inverseEntity="Chapter"/>
+        <relationship name="episode" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Episode" inverseName="content" inverseEntity="Episode"/>
         <relationship name="titleRef" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Title" inverseName="contents" inverseEntity="Title"/>
+    </entity>
+    <entity name="Episode" representedClassName="Episode" syncable="YES" codeGenerationType="class">
+        <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="content" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Content" inverseName="episode" inverseEntity="Content"/>
     </entity>
     <entity name="Title" representedClassName="Title" syncable="YES" codeGenerationType="class">
         <attribute name="cover" optional="YES" attributeType="Binary"/>

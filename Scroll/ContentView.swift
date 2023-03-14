@@ -35,9 +35,9 @@ struct ContentView: View {
                 let name = title.title!
 
                 // The line limit with reserved spacing is enforced to align the titles (specifically the cover images)
-                // horizontally. A limit of 1 is compact and too short for many titles; a limit of 3 is too spacious and
+                // vertically. A limit of 1 is compact and too short for many titles; a limit of 3 is too spacious and
                 // still suseptible to longer titles; a limit of 2 catches many titles while missing some (e.g. "Made in
-                // Abyss: The Golden City of the Scorching Sun"), but is "just right".
+                // Abyss: The Golden City of the Scorching Sun"), but is "just right" for how much space it occupies.
                 Text(name)
                   .font(.callout)
                   .bold()
@@ -69,6 +69,5 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ContentView()
-      .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
   }
 }

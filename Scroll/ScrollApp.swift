@@ -49,9 +49,9 @@ struct ScrollApp: App {
     }
 
     WindowGroup("Edit Content", id: "edit-content-form", for: Content.ID.self) { $id in
-      if id != nil {
-        // TODO: Implement.
-        Text("...")
+      if let id {
+        EditContentFormView(id: id)
+          .environment(\.managedObjectContext, viewContext)
       }
     }
   }

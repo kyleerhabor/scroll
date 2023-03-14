@@ -17,7 +17,7 @@ struct PersistenceController {
     container = NSPersistentCloudKitContainer(name: "Scroll")
 
     if inMemory {
-      container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+      container.persistentStoreDescriptions.first!.url = .nullDevice
     }
 
     container.loadPersistentStores { (storeDescription, error) in
@@ -27,5 +27,21 @@ struct PersistenceController {
     }
 
     container.viewContext.automaticallyMergesChangesFromParent = true
+  }
+
+  static func getId(from url: URL, with context: NSManagedObjectContext) -> NSManagedObjectID? {
+    context.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: url)
+  }
+
+  static func getObject(from id: NSManagedObjectID, with context: NSManagedObjectContext) -> NSManagedObject? {
+    try? context.existingObject(with: id)
+  }
+
+  static func getObject(from url: URL, with context: NSManagedObjectContext) -> NSManagedObject? {
+    guard let id = self.getId(from: url, with: context) else {
+      return nil
+    }
+
+    return self.getObject(from: id, with: context)
   }
 }

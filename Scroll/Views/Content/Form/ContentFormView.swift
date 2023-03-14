@@ -19,14 +19,7 @@ struct ContentFormView: View {
     Form {
       TextField("Title:", text: $title)
 
-      HStack {
-        Spacer()
-
-        Button("Cancel", role: .cancel, action: cancel)
-        Button(label(with: purpose), action: submit)
-          .buttonStyle(.borderedProminent)
-          .disabled(!isComplete())
-      }
+      FormControlView(purpose: purpose, complete: isComplete(), submit: submit, cancel: cancel)
     }
     .padding()
     .navigationTitle(title(with: purpose))

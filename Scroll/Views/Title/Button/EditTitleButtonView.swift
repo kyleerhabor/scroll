@@ -23,6 +23,6 @@ struct EditTitleButtonView: View {
 
 struct EditTitleButtonView_Previews: PreviewProvider {
   static var previews: some View {
-    EditTitleButtonView(id: .init(string: "/dev/null")!) // Hopefully this does nothing.
+    EditTitleButtonView(id: .nullDevice)
   }
 }

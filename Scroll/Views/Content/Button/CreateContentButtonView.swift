@@ -23,6 +23,6 @@ struct CreateContentButtonView: View {
 
 struct CreateContentButtonView_Previews: PreviewProvider {
   static var previews: some View {
-    CreateContentButtonView(titleId: .init(string: "/dev/null")!)
+    CreateContentButtonView(titleId: .nullDevice)
   }
 }
