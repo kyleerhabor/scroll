@@ -6,6 +6,7 @@
     </entity>
     <entity name="Content" representedClassName="Content" syncable="YES" codeGenerationType="class">
         <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
         <relationship name="chapter" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Chapter" inverseName="content" inverseEntity="Chapter"/>
         <relationship name="episode" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Episode" inverseName="content" inverseEntity="Episode"/>
         <relationship name="titleRef" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Title" inverseName="contents" inverseEntity="Title"/>
