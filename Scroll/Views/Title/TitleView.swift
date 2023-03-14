@@ -59,11 +59,13 @@ struct TitleView: View {
 
           LazyVGrid(columns: [.init(.adaptive(minimum: width))], alignment: .leading) {
             ForEach(title.contentsArray) { content in
-              GroupBox {
-                Text(content.title!)
-              }.contextMenu {
-                EditContentButtonView(id: content.id)
-              }
+              NavigationLink(value: content) {
+                GroupBox {
+                  Text(content.title!)
+                }.contextMenu {
+                  EditContentButtonView(id: content.id)
+                }
+              }.buttonStyle(.plain)
             }
 
             // On iOS, I imagine adding a translucent accented button with the text and icon vertical.
@@ -77,7 +79,9 @@ struct TitleView: View {
     #else
     .navigationSubtitle(name)
     #endif
-    .toolbar {
+    .navigationDestination(for: Content.self) { content in
+      TContentView(content: content)
+    }.toolbar {
       EditTitleButtonView(id: title.id)
       DeleteTitleButtonView(title: title)
 

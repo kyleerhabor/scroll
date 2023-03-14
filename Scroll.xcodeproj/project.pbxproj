@@ -24,6 +24,8 @@
 		0063765929BE4369001EBA44 /* EditTitleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063765829BE4369001EBA44 /* EditTitleButtonView.swift */; };
 		0063765B29BE4C1C001EBA44 /* DeleteTitleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063765A29BE4C1C001EBA44 /* DeleteTitleButtonView.swift */; };
 		0063765F29BE78D9001EBA44 /* TitleEntryForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063765E29BE78D9001EBA44 /* TitleEntryForm.swift */; };
+		007ECE3829C127E300286ED5 /* TContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007ECE3729C127E300286ED5 /* TContentView.swift */; };
+		007ECE3A29C12B3200286ED5 /* DeleteContentButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007ECE3929C12B3200286ED5 /* DeleteContentButtonView.swift */; };
 		0082BFC529B41AC300C35E79 /* ScrollApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFC429B41AC300C35E79 /* ScrollApp.swift */; };
 		0082BFC729B41AC300C35E79 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFC629B41AC300C35E79 /* Persistence.swift */; };
 		0082BFCA29B41AC300C35E79 /* Scroll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFC829B41AC300C35E79 /* Scroll.xcdatamodeld */; };
@@ -71,6 +73,8 @@
 		0063765829BE4369001EBA44 /* EditTitleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTitleButtonView.swift; sourceTree = "<group>"; };
 		0063765A29BE4C1C001EBA44 /* DeleteTitleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTitleButtonView.swift; sourceTree = "<group>"; };
 		0063765E29BE78D9001EBA44 /* TitleEntryForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleEntryForm.swift; sourceTree = "<group>"; };
+		007ECE3729C127E300286ED5 /* TContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TContentView.swift; sourceTree = "<group>"; };
+		007ECE3929C12B3200286ED5 /* DeleteContentButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteContentButtonView.swift; sourceTree = "<group>"; };
 		0082BFC129B41AC300C35E79 /* Scroll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scroll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0082BFC429B41AC300C35E79 /* ScrollApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollApp.swift; sourceTree = "<group>"; };
 		0082BFC629B41AC300C35E79 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 		000E780129BEA6B400FF4679 /* Content */ = {
 			isa = PBXGroup;
 			children = (
+				007ECE3729C127E300286ED5 /* TContentView.swift */,
 				000E780229BEA6C600FF4679 /* Button */,
 				0004CED729C0254000D1DBE9 /* Form */,
 			);
@@ -157,6 +162,7 @@
 			children = (
 				000E780329BEA6D600FF4679 /* CreateContentButtonView.swift */,
 				0004CEDF29C038D200D1DBE9 /* EditContentButtonView.swift */,
+				007ECE3929C12B3200286ED5 /* DeleteContentButtonView.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -402,9 +408,11 @@
 				0063765329BC1E03001EBA44 /* View.swift in Sources */,
 				0082BFCC29B41AC300C35E79 /* ContentView.swift in Sources */,
 				0082BFCA29B41AC300C35E79 /* Scroll.xcdatamodeld in Sources */,
+				007ECE3829C127E300286ED5 /* TContentView.swift in Sources */,
 				0063765B29BE4C1C001EBA44 /* DeleteTitleButtonView.swift in Sources */,
 				0004CECE29BEE67000D1DBE9 /* CreateTitleFormView.swift in Sources */,
 				0004CEE229C0396300D1DBE9 /* Standard.swift in Sources */,
+				007ECE3A29C12B3200286ED5 /* DeleteContentButtonView.swift in Sources */,
 				0082BFF529B4613600C35E79 /* TitleView.swift in Sources */,
 				000E780A29BEB45700FF4679 /* CreateContentFormView.swift in Sources */,
 			);
