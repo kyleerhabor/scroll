@@ -30,61 +30,40 @@ struct ContentFormView: View {
 
   var body: some View {
     Form {
-      VStack(alignment: .leading) {
-        TextField("Title:", text: $title)
+      TextField("Title", text: $title)
 
-        Picker("Kind:", selection: $kind) {
-          // Who the FUCK thought it was a good idea to require this for optional values?
-          Text("None")
-            .tag(nil as MaybeKind)
+      Picker("Kind", selection: $kind) {
+        // Who the FUCK thought it was a good idea to require this for optional values?
+        Text("None")
+          .tag(nil as MaybeKind)
 
-          Text("Episode")
-            .tag(Content.Kind.episode as MaybeKind)
+        Text("Episode")
+          .tag(Content.Kind.episode as MaybeKind)
 
-          Text("Chapter")
-            .tag(Content.Kind.chapter as MaybeKind)
-        }.pickerStyle(.inline)
+        Text("Chapter")
+          .tag(Content.Kind.chapter as MaybeKind)
+      }.pickerStyle(.inline)
 
-        if let kind {
-          switch kind {
-            case .episode:
-              LabeledContent("Length:") {
-                // Design borrowed from Meta (the tag editor).
-                Group {
-                  VStack(alignment: .leading) {
-                    Text("Hours:")
+      Section("Episode") {
+        TextField("Hours", value: $hours, formatter: numberFormatter)
 
-                    TextField("Hours:", value: $hours, formatter: numberFormatter)
-                  }
+        TextField("Minutes", value: $minutes, formatter: numberFormatter)
 
-                  VStack(alignment: .leading) {
-                    Text("Minutes:")
+        TextField("Seconds", value: $seconds, formatter: numberFormatter)
+      }.disabled(kind != .episode)
 
-                    TextField("Minutes", value: $minutes, formatter: numberFormatter)
-                  }
-
-                  VStack(alignment: .leading) {
-                    Text("Seconds:")
-
-                    TextField("Seconds", value: $seconds, formatter: numberFormatter)
-                  }
-                }
-                .labelsHidden()
-                .frame(width: 64)
-              }
-            case .chapter:
-              TextField("Pages:", value: $pages, formatter: numberFormatter)
-          }
-        }
-
-        FormControlView(purpose: purpose, complete: isComplete(), submit: submit, cancel: cancel)
+      Section("Chapter") {
+        TextField("Pages", value: $pages, formatter: numberFormatter)
+          .disabled(kind != .chapter)
       }
-      .padding()
-      .navigationTitle(title(with: purpose))
+
+      FormControlView(purpose: purpose, complete: isComplete(), submit: submit, cancel: cancel)
     }
+    .formStyle(.grouped)
+    .navigationTitle(title(purpose: purpose))
   }
 
-  func title(with purpose: FormPurpose) -> String {
+  func title(purpose: FormPurpose) -> String {
     switch purpose {
       case .create: return "Create Content"
       case .edit: return "Edit Content"

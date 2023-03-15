@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Looks out of place in a grouped form.
 struct FormControlView: View {
   private(set) var purpose: FormPurpose
   private(set) var complete: Bool
