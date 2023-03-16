@@ -36,7 +36,7 @@ struct CreateContentFormView: View {
 
   func submit() {
     let content = Content(context: viewContext)
-    content.titleRef = (PersistenceController.getObject(from: titleId, with: viewContext) as! Title)
+    content.titleRef = (CoreDataStack.getObject(from: titleId, with: viewContext) as! Title)
     content.title = name
     content.kind = kind
 

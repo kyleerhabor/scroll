@@ -7,21 +7,6 @@
 
 import Foundation
 
-extension Title {
-  public var id: URL {
-    self.objectID.uriRepresentation()
-  }
-
-  // I *really* do not like this. There has to be a better way to do this (especially for CoreData sorting).
-  var contentsArray: [Content] {
-    guard let cont = self.contents else {
-      return []
-    }
-
-    return cont.allObjects as! [Content]
-  }
-}
-
 extension Content {
   public var id: URL {
     self.objectID.uriRepresentation()
@@ -38,15 +23,14 @@ extension Content {
         return nil
       }
 
-      return Kind(rawValue: self.type - 1)
+      return Kind(rawValue: decrement(self.type))
     }
     set {
       if let newValue {
-        self.type = newValue.rawValue + 1
+        self.type = increment(newValue.rawValue)
       } else {
         self.type = 0
       }
     }
   }
 }
-

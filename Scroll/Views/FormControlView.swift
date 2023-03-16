@@ -20,12 +20,13 @@ struct FormControlView: View {
 
       Button("Cancel", role: .cancel) {
         cancel()
-      }
+      }.keyboardShortcut(.cancelAction)
 
       Button(submitLabel(with: purpose)) {
         submit()
       }
-      .buttonStyle(.borderedProminent)
+
+      .keyboardShortcut(.defaultAction)
       .disabled(!complete)
     }
   }

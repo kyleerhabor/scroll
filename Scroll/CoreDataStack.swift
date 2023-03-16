@@ -1,5 +1,5 @@
 //
-//  Persistence.swift
+//  CoreDataStack.swift
 //  Scroll
 //
 //  Created by Kyle Erhabor on 3/4/23.
@@ -7,9 +7,9 @@
 
 import CoreData
 
-struct PersistenceController {
-  static let shared = PersistenceController()
-  static let preview = PersistenceController(inMemory: true)
+struct CoreDataStack {
+  static let shared = CoreDataStack()
+  static let preview = CoreDataStack(inMemory: true)
 
   let container: NSPersistentCloudKitContainer
 
@@ -21,7 +21,7 @@ struct PersistenceController {
     }
 
     container.loadPersistentStores { (storeDescription, error) in
-      if let error = error as NSError? {
+      if let error = error as? NSError {
         fatalError("Unresolved error \(error), \(error.userInfo)")
       }
     }

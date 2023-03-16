@@ -37,7 +37,7 @@ struct EditTitleFormView: View {
   }
 
   func getTitle() -> Title {
-    PersistenceController.getObject(from: id, with: viewContext) as! Title
+    CoreDataStack.getObject(from: id, with: viewContext) as! Title
   }
 
   func submit() {

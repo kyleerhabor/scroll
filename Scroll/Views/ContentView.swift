@@ -9,10 +9,10 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-  // New titles should appear first.
-  //
-  // For some reason, creating a title adds it to the end.
-  @FetchRequest(sortDescriptors: [.init(keyPath: \NSManagedObject.objectID, ascending: false)])
+  // For some reason, creating a title appends to the list when using .objectID as the keypath. Refreshing fixes the
+  // order, so I have a slight feeling it's caused by temporary IDs.
+  @FetchRequest(sortDescriptors: [.init(\.title)],
+                animation: .default)
   private var titles: FetchedResults<Title>
 
   var body: some View {
@@ -29,7 +29,7 @@ struct ContentView: View {
               // The default spacing is a bit much; 4 is too much, and 2 is a bit too short. 3 looks "fine".
               VStack(alignment: .leading, spacing: 3) {
                 TitleCoverView(cover: title.cover)
-                  .frame(width: width, height: titleCoverHeight(from: width))
+                  .frame(width: width, height: TitleCoverStyleModifier.height(from: width))
                   .titleCoverStyle()
 
                 let name = title.title!
@@ -50,6 +50,7 @@ struct ContentView: View {
             .contextMenu {
               // It's kind of awkward to repeat "Title" at the end.
               EditTitleButtonView(id: title.id)
+              CreateEntryButtonView(titleId: title.id)
             }
           }
         }.padding()

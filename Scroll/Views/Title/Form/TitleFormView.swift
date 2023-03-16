@@ -23,7 +23,7 @@ struct TitleFormView: View {
           let width: CGFloat = 128
 
           TitleCoverView(cover: cover)
-            .frame(width: width, height: titleCoverHeight(from: width))
+            .frame(width: width, height: TitleCoverStyleModifier.height(from: width))
             .titleCoverStyle()
 
           Button {

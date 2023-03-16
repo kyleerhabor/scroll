@@ -24,7 +24,7 @@ struct TitleView: View {
 
           VStack {
             TitleCoverView(cover: title.cover)
-              .frame(width: width, height: titleCoverHeight(from: width))
+              .frame(width: width, height: TitleCoverStyleModifier.height(from: width))
               .titleCoverStyle()
 
 //            VStack(spacing: 4) {
@@ -48,9 +48,7 @@ struct TitleView: View {
 
         Divider()
 
-        let contents = title.contentsArray
-
-        if !contents.isEmpty {
+        if let contents = title.contents, !contents.isEmpty {
           Text("Contents")
             .font(.title2)
             .fontWeight(.medium)
@@ -58,7 +56,7 @@ struct TitleView: View {
           let width: CGFloat = 128
 
           LazyVGrid(columns: [.init(.adaptive(minimum: width))], alignment: .leading) {
-            ForEach(title.contentsArray) { content in
+            ForEach(Array(contents)) { content in
               NavigationLink(value: content) {
                 GroupBox {
                   Text(content.title!)
@@ -87,6 +85,7 @@ struct TitleView: View {
 
       Menu {
         CreateContentButtonView(titleId: title.id)
+        CreateEntryButtonView(titleId: title.id)
       } label: {
         Label("Add", systemImage: "plus")
       }

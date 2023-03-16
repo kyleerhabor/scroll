@@ -18,10 +18,20 @@ struct ContentFormView: View {
   private(set) var submit: () -> Void
   private(set) var cancel: () -> Void
 
-  private let numberFormatter = {
+  private let durationFormatter = {
     let formatter = NumberFormatter()
     formatter.allowsFloats = false
     formatter.minimum = 0
+    formatter.maximum = NSNumber(value: Int32.max)
+
+    return formatter
+  }()
+
+  private let pagesFormatter = {
+    let formatter = NumberFormatter()
+    formatter.allowsFloats = false
+    formatter.minimum = 0
+    formatter.maximum = NSNumber(value: Int16.max)
 
     return formatter
   }()
@@ -45,17 +55,26 @@ struct ContentFormView: View {
       }.pickerStyle(.inline)
 
       Section("Episode") {
-        TextField("Hours", value: $hours, formatter: numberFormatter)
+        // Creating a Stepper with a format of .timeDuration seems to trigger some form configuration error.
 
-        TextField("Minutes", value: $minutes, formatter: numberFormatter)
+        TextField("Hours", value: $hours, formatter: durationFormatter)
 
-        TextField("Seconds", value: $seconds, formatter: numberFormatter)
+        TextField("Minutes", value: $minutes, formatter: durationFormatter)
+
+        TextField("Seconds", value: $seconds, formatter: durationFormatter)
       }.disabled(kind != .episode)
 
       Section("Chapter") {
-        TextField("Pages", value: $pages, formatter: numberFormatter)
-          .disabled(kind != .chapter)
-      }
+        // I'd like to use a stepper with a format of .number, but it:
+        // - requires a double
+        // - allows invalid inputs (e.g. negatives)
+        // - appears to be buggy.
+        //
+        // The main benefit to a stepper is it's more platform aware (e.g. showing a text field and vertical stepper on
+        // macOS), but on other platforms, it would likely still be a bad idea, since a chapter could have many pages
+        // (e.g. 80), requiring a long time to press/hold to the number.
+        TextField("Pages", value: $pages, formatter: pagesFormatter)
+      }.disabled(kind != .chapter)
 
       FormControlView(purpose: purpose, complete: isComplete(), submit: submit, cancel: cancel)
     }

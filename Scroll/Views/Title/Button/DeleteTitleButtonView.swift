@@ -38,7 +38,7 @@ struct DeleteTitleButtonView: View {
 }
 
 struct DeleteTitleButtonView_Previews: PreviewProvider {
-  static private let viewContext = PersistenceController.preview.container.viewContext
+  static private let viewContext = CoreDataStack.preview.container.viewContext
 
   static var previews: some View {
     DeleteTitleButtonView(title: .init(context: viewContext))

@@ -35,7 +35,7 @@ struct TContentView: View { // T[itle]ContentView to not conflict with ContentVi
 }
 
 struct TContentView_Previews: PreviewProvider {
-  static private let viewContext = PersistenceController.preview.container.viewContext
+  static private let viewContext = CoreDataStack.preview.container.viewContext
   static private let content: Content = {
     let content = Content(context: viewContext)
     content.title = "Invasion"

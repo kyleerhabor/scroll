@@ -53,17 +53,19 @@ struct EditContentFormView: View {
   }
 
   func getContent() -> Content {
-    PersistenceController.getObject(from: id, with: viewContext) as! Content
+    CoreDataStack.getObject(from: id, with: viewContext) as! Content
   }
 
   func submit() {
     let content = getContent()
     content.title = title
     content.kind = kind
-    // This is not future-proof, since a new kind could be added which doesn't exist on older content. A proper solution
-    // would involve upserting.
-    content.episode?.duration = Int32((hours * 60 * 60) + (minutes * 60) + seconds)
-    content.chapter?.pages = Int16(pages)
+
+    let episode = content.episode ?? createEpisode(for: content)
+    episode.duration = Int32((hours * 60 * 60) + (minutes * 60) + seconds)
+
+    let chapter = content.chapter ?? createChapter(for: content)
+    chapter.pages = Int16(pages)
 
     do {
       try viewContext.save()
@@ -74,6 +76,20 @@ struct EditContentFormView: View {
 
       didError = true
     }
+  }
+
+  func createEpisode(for content: Content) -> Episode {
+    let episode = Episode(context: viewContext)
+    episode.content = content
+
+    return episode
+  }
+
+  func createChapter(for content: Content) -> Chapter {
+    let chapter = Chapter(context: viewContext)
+    chapter.content = content
+
+    return chapter
   }
 }
 

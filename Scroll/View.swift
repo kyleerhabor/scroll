@@ -8,16 +8,10 @@
 import Foundation
 import SwiftUI
 
-let titleCoverCornerRadius: CGFloat = 4
-
 extension View {
   func titleCoverStyle() -> some View {
-    clipped().cornerRadius(titleCoverCornerRadius)
+    self.modifier(TitleCoverStyleModifier())
   }
-}
-
-func titleCoverHeight(from width: CGFloat) -> CGFloat {
-  width * (3 / 2)
 }
 
 struct TableLabeledContentStyle: LabeledContentStyle {

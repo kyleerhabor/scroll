@@ -9,11 +9,9 @@ import SwiftUI
 
 @main
 struct ScrollApp: App {
-  private let persistenceController = PersistenceController.shared
+  let viewContext = CoreDataStack.shared.container.viewContext
 
   var body: some Scene {
-    let viewContext = persistenceController.container.viewContext
-
     WindowGroup {
       ContentView()
         .environment(\.managedObjectContext, viewContext)
@@ -51,6 +49,13 @@ struct ScrollApp: App {
     WindowGroup("Edit Content", id: "edit-content-form", for: Content.ID.self) { $id in
       if let id {
         EditContentFormView(id: id)
+          .environment(\.managedObjectContext, viewContext)
+      }
+    }
+
+    WindowGroup("Create Entry", id: "create-entry-form", for: Title.ID.self) { $id in
+      if let id {
+        CreateEntryFormView(titleId: id)
           .environment(\.managedObjectContext, viewContext)
       }
     }
