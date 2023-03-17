@@ -20,7 +20,7 @@ struct EntryFormContentView: View {
             // both the progress and duration. This is especially so for titles which span ~24 minutes for each episode
             // (i.e. TV). If a title has a mix of short (< hour) and long (> hour) episodes, then I could imagine
             // justifying the zeroes, but a TV itself doesn't know its format (it could be a mix of e.g. episodes and
-            //chapters)
+            // chapters)
             let format = Duration.TimeFormatStyle.time(
               pattern: Duration.seconds(duration) >= .hour
                 ? .hourMinuteSecond

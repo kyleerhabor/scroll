@@ -25,7 +25,6 @@ struct FormControlView: View {
       Button(submitLabel(with: purpose)) {
         submit()
       }
-
       .keyboardShortcut(.defaultAction)
       .disabled(!complete)
     }

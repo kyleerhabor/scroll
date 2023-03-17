@@ -13,8 +13,8 @@ struct CreateEntryFormView: View {
 
   private(set) var titleId: Title.ID
   @State private var title: Title?
-  @State private var name = ""
-  @State private var notes = ""
+  @SceneStorage("name") private var name = ""
+  @SceneStorage("notes") private var notes = ""
 
   var body: some View {
     EntryFormView(purpose: .create, title: title, name: $name, notes: $notes) {
