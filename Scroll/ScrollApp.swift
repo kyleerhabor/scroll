@@ -19,7 +19,7 @@ struct ScrollApp: App {
 
     WindowGroup("Create Title", id: "create-title-form") {
       CreateTitleFormView()
-        .environment(\.managedObjectContext, viewContext)
+        .environment(\.managedObjectContext, childContext(from: viewContext))
     }
 
     // For views where the ID is nil (seems to be from restoration not being possible; don't know how), I'd like to show

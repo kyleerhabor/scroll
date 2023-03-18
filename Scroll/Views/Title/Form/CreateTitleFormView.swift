@@ -22,9 +22,11 @@ struct CreateTitleFormView: View {
       title: $title,
       cover: $cover,
       description: $description,
-      submit: submit,
-      cancel: dismiss.callAsFunction
-    ).alert("Could not create title.", isPresented: $didError) {}
+      submit: submit
+    ) {
+      viewContext.rollback()
+      dismiss()
+    }.alert("Could not create title.", isPresented: $didError) {}
   }
 
   func submit() {
