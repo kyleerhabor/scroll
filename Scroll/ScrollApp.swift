@@ -15,13 +15,6 @@ struct ScrollApp: App {
     WindowGroup {
       ContentView()
         .environment(\.managedObjectContext, viewContext)
-    }.commands {
-      CommandGroup(after: .newItem) {
-        Section {
-          CreateTitleButtonView()
-            .keyboardShortcut("n", modifiers: [.command, .shift, .option])
-        }
-      }
     }
 
     WindowGroup("Create Title", id: "create-title-form") {
@@ -37,27 +30,34 @@ struct ScrollApp: App {
         EditTitleFormView(id: id)
           .environment(\.managedObjectContext, viewContext)
       }
-    }
+    }.commandsRemoved()
 
     WindowGroup("Create Content", id: "create-content-form", for: Title.ID.self) { $id in
       if let id {
         CreateContentFormView(titleId: id)
           .environment(\.managedObjectContext, viewContext)
       }
-    }
+    }.commandsRemoved()
 
     WindowGroup("Edit Content", id: "edit-content-form", for: Content.ID.self) { $id in
       if let id {
         EditContentFormView(id: id)
           .environment(\.managedObjectContext, viewContext)
       }
-    }
+    }.commandsRemoved()
 
-    WindowGroup("Create Entry", id: "create-entry-form", for: Title.ID.self) { $id in
+    WindowGroup("Create Entry", id: "create-entry-form", for: Content.ID.self) { $id in
       if let id {
-        CreateEntryFormView(titleId: id)
-          .environment(\.managedObjectContext, viewContext)
+        CreateEntryFormView(contentId: id)
+          .environment(\.managedObjectContext, childContext(from: viewContext))
       }
-    }
+    }.commandsRemoved()
+  }
+
+  func childContext(from context: NSManagedObjectContext) -> NSManagedObjectContext {
+    let child = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    child.parent = viewContext
+
+    return child
   }
 }

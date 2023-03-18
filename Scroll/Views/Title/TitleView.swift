@@ -62,6 +62,7 @@ struct TitleView: View {
                   Text(content.title!)
                 }.contextMenu {
                   EditContentButtonView(id: content.id)
+                  CreateEntryButtonView(contentId: content.id)
                 }
               }.buttonStyle(.plain)
             }
@@ -85,7 +86,6 @@ struct TitleView: View {
 
       Menu {
         CreateContentButtonView(titleId: title.id)
-        CreateEntryButtonView(titleId: title.id)
       } label: {
         Label("Add", systemImage: "plus")
       }

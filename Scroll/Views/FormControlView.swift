@@ -11,8 +11,8 @@ import SwiftUI
 struct FormControlView: View {
   private(set) var purpose: FormPurpose
   private(set) var complete: Bool
-  private(set) var submit: () -> Void
-  private(set) var cancel: () -> Void
+  private(set) var submit: SideEffect
+  private(set) var cancel: SideEffect
 
   var body: some View {
     HStack {

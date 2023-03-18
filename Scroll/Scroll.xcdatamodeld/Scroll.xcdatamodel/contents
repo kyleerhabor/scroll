@@ -7,22 +7,24 @@
     <entity name="Content" representedClassName="Content" syncable="YES" codeGenerationType="class">
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
-        <relationship name="chapter" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Chapter" inverseName="content" inverseEntity="Chapter"/>
-        <relationship name="entryContent" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EntryContent" inverseName="content" inverseEntity="EntryContent"/>
-        <relationship name="episode" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Episode" inverseName="content" inverseEntity="Episode"/>
+        <relationship name="chapter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chapter" inverseName="content" inverseEntity="Chapter"/>
+        <relationship name="entries" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Entry" inverseName="content" inverseEntity="Entry"/>
+        <relationship name="episode" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Episode" inverseName="content" inverseEntity="Episode"/>
         <relationship name="titleRef" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Title" inverseName="contents" inverseEntity="Title"/>
     </entity>
     <entity name="Entry" representedClassName="Entry" syncable="YES" codeGenerationType="class">
-        <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
-        <relationship name="contents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EntryContent" inverseName="entry" inverseEntity="EntryContent"/>
-        <relationship name="title" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Title" inverseName="entry" inverseEntity="Title"/>
+        <relationship name="chapter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryChapter" inverseName="entry" inverseEntity="EntryChapter"/>
+        <relationship name="content" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Content" inverseName="entries" inverseEntity="Content"/>
+        <relationship name="episode" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryEpisode" inverseName="entry" inverseEntity="EntryEpisode"/>
     </entity>
-    <entity name="EntryContent" representedClassName="EntryContent" syncable="YES" codeGenerationType="class">
-        <attribute name="chapterProgress" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="episodeProgress" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="content" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Content" inverseName="entryContent" inverseEntity="Content"/>
-        <relationship name="entry" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Entry" inverseName="contents" inverseEntity="Entry"/>
+    <entity name="EntryChapter" representedClassName="EntryChapter" syncable="YES" codeGenerationType="class">
+        <attribute name="progress" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="entry" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Entry" inverseName="chapter" inverseEntity="Entry"/>
+    </entity>
+    <entity name="EntryEpisode" representedClassName="EntryEpisode" syncable="YES" codeGenerationType="class">
+        <attribute name="progress" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="entry" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Entry" inverseName="episode" inverseEntity="Entry"/>
     </entity>
     <entity name="Episode" representedClassName="Episode" syncable="YES" codeGenerationType="class">
         <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -33,6 +35,5 @@
         <attribute name="desc" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="contents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Content" inverseName="titleRef" inverseEntity="Content"/>
-        <relationship name="entry" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Entry" inverseName="title" inverseEntity="Entry"/>
     </entity>
 </model>

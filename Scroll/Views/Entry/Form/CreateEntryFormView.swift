@@ -2,41 +2,36 @@
 //  CreateEntryFormView.swift
 //  Scroll
 //
-//  Created by Kyle Erhabor on 3/14/23.
+//  Created by Kyle Erhabor on 3/17/23.
 //
 
 import SwiftUI
 
 struct CreateEntryFormView: View {
-  @Environment(\.dismiss) private var dismiss
   @Environment(\.managedObjectContext) private var viewContext
 
-  private(set) var titleId: Title.ID
-  @State private var title: Title?
-  @SceneStorage("name") private var name = ""
-  @SceneStorage("notes") private var notes = ""
+  var contentId: Content.ID
 
   var body: some View {
-    EntryFormView(purpose: .create, title: title, name: $name, notes: $notes) {
-      print("!!!")
-    } cancel: {
-      dismiss()
-    }.onAppear {
-      self.title = CoreDataStack.getObject(from: titleId, with: viewContext) as? Title
+    DataView { (entry: Entry) in
+      EntryFormView(purpose: .create, entry: entry)
+    } hidden: {
+      HiddenView()
+    } loading: {
+      if let content = CoreDataStack.getObject(from: contentId, with: viewContext) as? Content {
+        let entry = Entry(context: viewContext)
+        entry.content = content
+
+        return entry
+      }
+
+      return nil
     }
   }
 }
 
 struct CreateEntryFormView_Previews: PreviewProvider {
-  static private let context = CoreDataStack.preview.container.viewContext
-  static private let titleId: Title.ID = {
-    let title = Title(context: context)
-    title.title = "Kin of the Stars"
-
-    return title.id
-  }()
-
   static var previews: some View {
-    CreateEntryFormView(titleId: titleId)
+    CreateEntryFormView(contentId: .nullDevice)
   }
 }

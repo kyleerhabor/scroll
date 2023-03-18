@@ -17,11 +17,15 @@
 		000E780429BEA6D600FF4679 /* CreateContentButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E780329BEA6D600FF4679 /* CreateContentButtonView.swift */; };
 		000E780629BEA95000FF4679 /* ContentFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E780529BEA95000FF4679 /* ContentFormView.swift */; };
 		000E780A29BEB45700FF4679 /* CreateContentFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E780929BEB45700FF4679 /* CreateContentFormView.swift */; };
-		000F2D1F29C25CED00B83815 /* EntryFormProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F2D1E29C25CED00B83815 /* EntryFormProgressView.swift */; };
-		000F2D2129C2934400B83815 /* EntryFormContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F2D2029C2934400B83815 /* EntryFormContentView.swift */; };
 		000F2D5F29C3893A00B83815 /* TitleCoverStyleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F2D5E29C3893A00B83815 /* TitleCoverStyleModifier.swift */; };
 		000F2D6729C3C07600B83815 /* Title+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F2D6529C3C07600B83815 /* Title+CoreDataClass.swift */; };
 		000F2D6829C3C07600B83815 /* Title+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F2D6629C3C07600B83815 /* Title+CoreDataProperties.swift */; };
+		000F2D6D29C4D8A200B83815 /* EntryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F2D6C29C4D8A200B83815 /* EntryFormView.swift */; };
+		000F2D6F29C4EFAB00B83815 /* HiddenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F2D6E29C4EFAB00B83815 /* HiddenView.swift */; };
+		000F2D7129C4EFF700B83815 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F2D7029C4EFF700B83815 /* DataView.swift */; };
+		000F2D7529C52F2C00B83815 /* CreateEntryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F2D7429C52F2C00B83815 /* CreateEntryFormView.swift */; };
+		000F2D7729C5655500B83815 /* EntryFormEpisodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F2D7629C5655500B83815 /* EntryFormEpisodeView.swift */; };
+		000F2D7929C5F6DF00B83815 /* EntryFormChapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F2D7829C5F6DE00B83815 /* EntryFormChapterView.swift */; };
 		0063764C29BA954B001EBA44 /* TitleCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063764B29BA954B001EBA44 /* TitleCoverView.swift */; };
 		0063765329BC1E03001EBA44 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063765229BC1E03001EBA44 /* View.swift */; };
 		0063765529BD931C001EBA44 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063765429BD931C001EBA44 /* Model.swift */; };
@@ -31,8 +35,6 @@
 		007ECE3829C127E300286ED5 /* TContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007ECE3729C127E300286ED5 /* TContentView.swift */; };
 		007ECE3A29C12B3200286ED5 /* DeleteContentButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007ECE3929C12B3200286ED5 /* DeleteContentButtonView.swift */; };
 		007ECE3E29C14DC900286ED5 /* CreateEntryButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007ECE3D29C14DC900286ED5 /* CreateEntryButtonView.swift */; };
-		007ECE4129C14F6400286ED5 /* EntryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007ECE4029C14F6400286ED5 /* EntryFormView.swift */; };
-		007ECE4329C1583800286ED5 /* CreateEntryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007ECE4229C1583800286ED5 /* CreateEntryFormView.swift */; };
 		0082BFC529B41AC300C35E79 /* ScrollApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFC429B41AC300C35E79 /* ScrollApp.swift */; };
 		0082BFC729B41AC300C35E79 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFC629B41AC300C35E79 /* CoreDataStack.swift */; };
 		0082BFCA29B41AC300C35E79 /* Scroll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFC829B41AC300C35E79 /* Scroll.xcdatamodeld */; };
@@ -73,11 +75,15 @@
 		000E780329BEA6D600FF4679 /* CreateContentButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateContentButtonView.swift; sourceTree = "<group>"; };
 		000E780529BEA95000FF4679 /* ContentFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFormView.swift; sourceTree = "<group>"; };
 		000E780929BEB45700FF4679 /* CreateContentFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateContentFormView.swift; sourceTree = "<group>"; };
-		000F2D1E29C25CED00B83815 /* EntryFormProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormProgressView.swift; sourceTree = "<group>"; };
-		000F2D2029C2934400B83815 /* EntryFormContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormContentView.swift; sourceTree = "<group>"; };
 		000F2D5E29C3893A00B83815 /* TitleCoverStyleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCoverStyleModifier.swift; sourceTree = "<group>"; };
 		000F2D6529C3C07600B83815 /* Title+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Title+CoreDataClass.swift"; sourceTree = "<group>"; };
 		000F2D6629C3C07600B83815 /* Title+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Title+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		000F2D6C29C4D8A200B83815 /* EntryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormView.swift; sourceTree = "<group>"; };
+		000F2D6E29C4EFAB00B83815 /* HiddenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenView.swift; sourceTree = "<group>"; };
+		000F2D7029C4EFF700B83815 /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
+		000F2D7429C52F2C00B83815 /* CreateEntryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEntryFormView.swift; sourceTree = "<group>"; };
+		000F2D7629C5655500B83815 /* EntryFormEpisodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormEpisodeView.swift; sourceTree = "<group>"; };
+		000F2D7829C5F6DE00B83815 /* EntryFormChapterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormChapterView.swift; sourceTree = "<group>"; };
 		0063764B29BA954B001EBA44 /* TitleCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCoverView.swift; sourceTree = "<group>"; };
 		0063765229BC1E03001EBA44 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		0063765429BD931C001EBA44 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -87,8 +93,6 @@
 		007ECE3729C127E300286ED5 /* TContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TContentView.swift; sourceTree = "<group>"; };
 		007ECE3929C12B3200286ED5 /* DeleteContentButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteContentButtonView.swift; sourceTree = "<group>"; };
 		007ECE3D29C14DC900286ED5 /* CreateEntryButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEntryButtonView.swift; sourceTree = "<group>"; };
-		007ECE4029C14F6400286ED5 /* EntryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormView.swift; sourceTree = "<group>"; };
-		007ECE4229C1583800286ED5 /* CreateEntryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEntryFormView.swift; sourceTree = "<group>"; };
 		0082BFC129B41AC300C35E79 /* Scroll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scroll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0082BFC429B41AC300C35E79 /* ScrollApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollApp.swift; sourceTree = "<group>"; };
 		0082BFC629B41AC300C35E79 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -222,10 +226,10 @@
 		007ECE3F29C14F4F00286ED5 /* Form */ = {
 			isa = PBXGroup;
 			children = (
-				007ECE4029C14F6400286ED5 /* EntryFormView.swift */,
-				000F2D2029C2934400B83815 /* EntryFormContentView.swift */,
-				000F2D1E29C25CED00B83815 /* EntryFormProgressView.swift */,
-				007ECE4229C1583800286ED5 /* CreateEntryFormView.swift */,
+				000F2D6C29C4D8A200B83815 /* EntryFormView.swift */,
+				000F2D7629C5655500B83815 /* EntryFormEpisodeView.swift */,
+				000F2D7829C5F6DE00B83815 /* EntryFormChapterView.swift */,
+				000F2D7429C52F2C00B83815 /* CreateEntryFormView.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -298,6 +302,8 @@
 			isa = PBXGroup;
 			children = (
 				0082BFCB29B41AC300C35E79 /* ContentView.swift */,
+				000F2D7029C4EFF700B83815 /* DataView.swift */,
+				000F2D6E29C4EFAB00B83815 /* HiddenView.swift */,
 				0004CED129BEE8EC00D1DBE9 /* FormControlView.swift */,
 				000E780129BEA6B400FF4679 /* Content */,
 				007ECE3B29C149C100286ED5 /* Entry */,
@@ -439,34 +445,36 @@
 				000F2D6729C3C07600B83815 /* Title+CoreDataClass.swift in Sources */,
 				000E780629BEA95000FF4679 /* ContentFormView.swift in Sources */,
 				0004CED029BEE7FE00D1DBE9 /* TitleFormView.swift in Sources */,
+				000F2D7529C52F2C00B83815 /* CreateEntryFormView.swift in Sources */,
 				0004CEE029C038D200D1DBE9 /* EditContentButtonView.swift in Sources */,
+				000F2D7129C4EFF700B83815 /* DataView.swift in Sources */,
 				007ECE3E29C14DC900286ED5 /* CreateEntryButtonView.swift in Sources */,
 				0063765529BD931C001EBA44 /* Model.swift in Sources */,
-				000F2D2129C2934400B83815 /* EntryFormContentView.swift in Sources */,
 				0004CEDE29C0369400D1DBE9 /* EditContentFormView.swift in Sources */,
 				0063764C29BA954B001EBA44 /* TitleCoverView.swift in Sources */,
-				007ECE4129C14F6400286ED5 /* EntryFormView.swift in Sources */,
+				000F2D6F29C4EFAB00B83815 /* HiddenView.swift in Sources */,
 				0004CED229BEE8EC00D1DBE9 /* FormControlView.swift in Sources */,
-				007ECE4329C1583800286ED5 /* CreateEntryFormView.swift in Sources */,
 				0063765929BE4369001EBA44 /* EditTitleButtonView.swift in Sources */,
 				0004CED429BEF59B00D1DBE9 /* EditTitleFormView.swift in Sources */,
 				0082BFC529B41AC300C35E79 /* ScrollApp.swift in Sources */,
 				000E780429BEA6D600FF4679 /* CreateContentButtonView.swift in Sources */,
 				000F2D5F29C3893A00B83815 /* TitleCoverStyleModifier.swift in Sources */,
 				0082BFC729B41AC300C35E79 /* CoreDataStack.swift in Sources */,
-				000F2D1F29C25CED00B83815 /* EntryFormProgressView.swift in Sources */,
 				0063765729BE4080001EBA44 /* CreateTitleButtonView.swift in Sources */,
 				0063765329BC1E03001EBA44 /* View.swift in Sources */,
 				0082BFCC29B41AC300C35E79 /* ContentView.swift in Sources */,
 				0082BFCA29B41AC300C35E79 /* Scroll.xcdatamodeld in Sources */,
+				000F2D7929C5F6DF00B83815 /* EntryFormChapterView.swift in Sources */,
 				007ECE3829C127E300286ED5 /* TContentView.swift in Sources */,
 				000F2D6829C3C07600B83815 /* Title+CoreDataProperties.swift in Sources */,
+				000F2D6D29C4D8A200B83815 /* EntryFormView.swift in Sources */,
 				0063765B29BE4C1C001EBA44 /* DeleteTitleButtonView.swift in Sources */,
 				0004CECE29BEE67000D1DBE9 /* CreateTitleFormView.swift in Sources */,
 				0004CEE229C0396300D1DBE9 /* Standard.swift in Sources */,
 				007ECE3A29C12B3200286ED5 /* DeleteContentButtonView.swift in Sources */,
 				0082BFF529B4613600C35E79 /* TitleView.swift in Sources */,
 				000E780A29BEB45700FF4679 /* CreateContentFormView.swift in Sources */,
+				000F2D7729C5655500B83815 /* EntryFormEpisodeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

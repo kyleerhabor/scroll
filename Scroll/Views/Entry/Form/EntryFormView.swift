@@ -2,110 +2,107 @@
 //  EntryFormView.swift
 //  Scroll
 //
-//  Created by Kyle Erhabor on 3/14/23.
+//  Created by Kyle Erhabor on 3/17/23.
 //
 
 import SwiftUI
 
-// I think the whole design of an entry here is flawed. The current design is that an entry represents a title consumed
-// by a set of its content. To put that more concretely, an entry is associated with a title and its contents. A major
-// limitation is that the content is a set, meaning that a user could not consume a single content multiple times. I've
-// always had mixed feelings about this design, but originally kept it since I thought of the "common way" people record
-// their titles.
-//
-// Another major reason I'm considering the design a mistake is how it requires the code to be structured. As an entry
-// represents a consumed set of the content in a title, an entry must represent internally many things. This has caused
-// me to think much about how I'd handle a variable amount of content being listed and modified in an e.g. create screen,
-// which is something very hard for me to model without resorting to inline Binding constructions (as my previous
-// project, Clematis, did) with indicies or a dedicated view model (which is unnecessary 95% of the time and would still
-// be complex, figuring out how to pair state with just details).
-//
-// As an improved version, I think an entry should represent consumed content. So, a single content can be consumed a
-// variable set of times. To actually bundle them togerher, I need a concept which represents a collection of entries.
-// I don't know if that content should be constrained to the title or allowed to overlap. I think the former would be
-// more appropriate for the problem, while the latter would be better for describing a kind of "list".
 struct EntryFormView: View {
+  @Environment(\.dismiss) private var dismiss
+  @Environment(\.managedObjectContext) private var viewContext
+
   var purpose: FormPurpose
-  var title: Title?
-  @Binding var name: String
-  @Binding var notes: String
-  var submit: () -> Void
-  var cancel: () -> Void
+  @ObservedObject var entry: Entry
+
+  @SceneStorage("notes") private var notes: String = ""
+  @State private var didErrorOnSubmit = false
 
   var body: some View {
-    NavigationStack {
-      Form {
-        Section {
-          TextField(text: $name) {
-            Text("Name")
-            Text("A custom label to help remember this entry.")
-          }
-        }
+    Form {
+      let content = entry.content!
 
-        if let contents = title?.contents {
-          Section("Content") {
-            ForEach(Array(contents), id: \.id) { content in
-              NavigationLink(value: content) {
-                LabeledContent("\(content.title!)") {
-                  // Ideally, I'd inline this, but the Swift compiler is too dumb to process it.
-                  EntryFormContentView(content: content)
-                }
+      if let kind = content.kind {
+        Section("Progress") {
+          switch kind {
+            case .episode:
+              if let episode = content.episode, episode.duration > 0 {
+                EntryFormEpisodeView(entry: entry)
               }
-            }
+            case .chapter:
+              if let chapter = content.chapter, chapter.pages > 0 {
+                EntryFormChapterView(entry: entry)
+              }
           }
         }
-
-        Section("Notes") {
-          // Looks bad (on macOS).
-          TextEditor(text: $notes)
-            .font(.body)
-        }
-
-        FormControlView(purpose: purpose, complete: title != nil, submit: submit, cancel: cancel)
       }
-      .formStyle(.grouped)
-      .navigationTitle(titleLabel())
-      .navigationSubtitle(title?.title ?? "")
-      .navigationDestination(for: Content.self) { content in
-        Text("...")
-          .navigationSubtitle(title?.title ?? "")
+
+      Section("Notes") {
+        // TextEditor looks worse (at least, on macOS), though this may be visually confusing.
+        TextField("Notes", text: $notes, prompt: Text("..."), axis: .vertical)
+          .labelsHidden()
+      }
+
+      FormControlView(purpose: purpose, complete: true) {
+        do {
+          try viewContext.save()
+          dismiss()
+        } catch let err {
+          print(err)
+
+          didErrorOnSubmit = true
+        }
+      } cancel: {
+        viewContext.rollback()
+        dismiss()
       }
     }
-  }
-
-  func submitLabel() -> String {
-    switch purpose {
-      case .create: return "Create"
-      case .edit: return "Save"
+    .formStyle(.grouped)
+    .navigationTitle(titleLabel())
+    .navigationSubtitle(entry.content!.title!)
+    .alert(submitErrorLabel(), isPresented: $didErrorOnSubmit) {}
+    .onChange(of: notes) { notes in
+      entry.notes = notes
     }
   }
 
   func titleLabel() -> String {
-    switch self.purpose {
+    switch purpose {
       case .create: return "Create Entry"
       case .edit: return "Edit Entry"
+    }
+  }
+
+  func submitErrorLabel() -> String {
+    switch purpose {
+      case .create: return "Could not create entry."
+      case .edit: return "Could not edit entry."
     }
   }
 }
 
 struct EntryFormView_Previews: PreviewProvider {
-  static private let context = CoreDataStack.preview.container.viewContext
-  static private let title: Title = {
-    let title = Title(context: context)
-    title.title = "Banner of the Stars"
+  static private var context = CoreDataStack.preview.container.viewContext
+  static private var entry: Entry = {
+    let entry = Entry(context: context)
+    entry.notes = "Hmm..."
 
-    return title
+    let content = Content(context: context)
+    content.title = "Surprise Attack"
+    content.kind = .episode
+    content.addToEntries(entry)
+
+    let episode = Episode(context: context)
+    episode.duration = .init(DateComponents(minute: 25, second: 7).seconds())
+    episode.content = content
+
+    let eEpisode = EntryEpisode(context: context)
+    eEpisode.progress = .init(DateComponents(minute: 2, second: 59).seconds())
+    eEpisode.entry = entry
+
+    return entry
   }()
 
   static var previews: some View {
-    EntryFormView(
-      purpose: .create,
-      title: title,
-      name: .constant("First, naive watch"),
-      notes: .constant("The world-building is fantastic."),
-      submit: noop,
-      cancel: noop
-    ).environment(\.managedObjectContext, context)
+    EntryFormView(purpose: .create, entry: entry)
   }
 }
-

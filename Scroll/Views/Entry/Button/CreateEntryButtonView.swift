@@ -10,11 +10,11 @@ import SwiftUI
 struct CreateEntryButtonView: View {
   @Environment(\.openWindow) private var openWindow
 
-  private(set) var titleId: Title.ID
+  private(set) var contentId: Content.ID
 
   var body: some View {
     Button {
-      openWindow(id: "create-entry-form", value: titleId)
+      openWindow(id: "create-entry-form", value: contentId)
     } label: {
       Label("Create Entry", systemImage: "plus")
     }
@@ -23,6 +23,6 @@ struct CreateEntryButtonView: View {
 
 struct CreateEntryButtonView_Previews: PreviewProvider {
   static var previews: some View {
-    CreateEntryButtonView(titleId: .nullDevice)
+    CreateEntryButtonView(contentId: .nullDevice)
   }
 }

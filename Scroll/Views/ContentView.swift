@@ -48,9 +48,7 @@ struct ContentView: View {
             .frame(width: width)
             .buttonStyle(.plain)
             .contextMenu {
-              // It's kind of awkward to repeat "Title" at the end.
               EditTitleButtonView(id: title.id)
-              CreateEntryButtonView(titleId: title.id)
             }
           }
         }.padding()
