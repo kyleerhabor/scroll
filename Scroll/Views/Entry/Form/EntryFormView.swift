@@ -81,8 +81,8 @@ struct EntryFormView: View {
 }
 
 struct EntryFormView_Previews: PreviewProvider {
-  static private var context = CoreDataStack.preview.container.viewContext
-  static private var entry: Entry = {
+  static private let context = CoreDataStack.preview.container.viewContext
+  static private let entry: Entry = {
     let entry = Entry(context: context)
     entry.notes = "Hmm..."
 
