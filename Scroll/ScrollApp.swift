@@ -42,7 +42,7 @@ struct ScrollApp: App {
     WindowGroup("Edit Content", id: "edit-content-form", for: Content.ID.self) { $id in
       if let id {
         EditContentFormView(id: id)
-          .environment(\.managedObjectContext, viewContext)
+          .environment(\.managedObjectContext, childContext(from: viewContext))
       }
     }.commandsRemoved()
 

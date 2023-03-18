@@ -29,9 +29,11 @@ struct EditContentFormView: View {
       minutes: $minutes,
       seconds: $seconds,
       pages: $pages,
-      submit: submit,
-      cancel: dismiss.callAsFunction
-    )
+      submit: submit
+    ) {
+      viewContext.rollback()
+      dismiss()
+    }
     .alert("Could not edit content", isPresented: $didError) {}
     .onAppear {
       let content = getContent()
