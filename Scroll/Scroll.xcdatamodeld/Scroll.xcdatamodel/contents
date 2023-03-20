@@ -33,7 +33,7 @@
     <entity name="Title" representedClassName="Title" syncable="YES">
         <attribute name="cover" optional="YES" attributeType="Binary"/>
         <attribute name="desc" optional="YES" attributeType="String"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String" minValueString="1"/>
         <relationship name="contents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Content" inverseName="titleRef" inverseEntity="Content"/>
     </entity>
 </model>

@@ -9,12 +9,14 @@ import Foundation
 import SwiftUI
 
 struct TitleCoverStyleModifier: ViewModifier {
-  var radius: CGFloat = 4
+  static var defaultRadius: CGFloat = 4
+  var radius = Self.defaultRadius
 
   func body(content: Self.Content) -> some View {
     content
       .clipped()
       .cornerRadius(radius)
+      .shadow(radius: 8)
   }
   
   static func height(from width: CGFloat) -> CGFloat {
