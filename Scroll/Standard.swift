@@ -24,7 +24,6 @@ extension Duration {
 }
 
 extension URL {
-  // Using URL(:string) requires an unwrap and sometimes fail when previewing (for some reason).
   static let nullDevice: Self = .init(filePath: "/dev/null")
 }
 

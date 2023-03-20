@@ -41,20 +41,22 @@ struct EditTitleFormView: View {
   }
 
   func submit() {
-    let ttl = getTitle()
-    ttl.title = title
-    ttl.desc = description.isEmpty ? nil : description
-    ttl.cover = cover
+    let title = getTitle()
+    title.title = self.title
 
-    do {
-      try viewContext.save()
-
-      dismiss()
-    } catch let err {
-      print(err)
-
-      didError = true
+    if !description.isEmpty {
+      title.desc = description
     }
+
+    title.cover = cover
+
+    guard case .success = viewContext.save() else {
+      didError = true
+
+      return
+    }
+
+    dismiss()
   }
 }
 

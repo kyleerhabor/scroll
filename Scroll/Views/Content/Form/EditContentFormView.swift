@@ -69,15 +69,13 @@ struct EditContentFormView: View {
     let chapter = content.chapter ?? createChapter(for: content)
     chapter.pages = Int16(pages)
 
-    do {
-      try viewContext.save()
-
-      dismiss()
-    } catch let err {
-      print(err)
-
+    guard case .success = viewContext.save() else {
       didError = true
+
+      return
     }
+
+    dismiss()
   }
 
   func createEpisode(for content: Content) -> Episode {

@@ -30,24 +30,22 @@ struct CreateTitleFormView: View {
   }
 
   func submit() {
-    let ttl = Title(context: viewContext)
-    ttl.title = title
+    let title = Title(context: viewContext)
+    title.title = self.title
 
     if !description.isEmpty {
-      ttl.desc = description
+      title.desc = description
     }
 
-    ttl.cover = cover
+    title.cover = cover
 
-    do {
-      try viewContext.save()
-
-      dismiss()
-    } catch let err {
-      print(err)
-
+    guard case .success = viewContext.save() else {
       didError = true
+
+      return
     }
+
+    dismiss()
   }
 }
 

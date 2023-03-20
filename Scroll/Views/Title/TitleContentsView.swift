@@ -13,7 +13,7 @@ struct TitleContentsView: View {
   let title: Title
 
   @FetchRequest private var contents: FetchedResults<Content>
-  @State private var didErrorOnDelete = false
+  @State private var didError = false
 
   var body: some View {
     List {
@@ -27,12 +27,8 @@ struct TitleContentsView: View {
         if !staged.isEmpty {
           staged.forEach(viewContext.delete)
 
-          do {
-            try viewContext.save()
-          } catch let err {
-            print(err)
-
-            didErrorOnDelete = true
+          if case .failure = viewContext.save() {
+            didError = true
           }
         }
       }
@@ -40,7 +36,7 @@ struct TitleContentsView: View {
     .navigationTitle("Contents")
     .navigationSubtitle(title.title!)
     // Since there could have been many contents the user tried to delete in one, the error message could be improved.
-    .alert("Could not delete content.", isPresented: $didErrorOnDelete) {}
+    .alert("Could not delete content.", isPresented: $didError) {}
   }
 
   init(title: Title) {

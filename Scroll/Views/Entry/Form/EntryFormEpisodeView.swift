@@ -59,9 +59,9 @@ struct EntryFormEpisodeView: View {
         .onChange(of: hours) { _ in updateEpisodeProgress() }
     }.onAppear {
       if let progress = entry.episode?.progress {
-        self.hours = Double(progress / 60 / 60)
-        self.minutes = Double(progress / 60 % 60)
-        self.seconds = Double(progress % 60)
+        hours = Double(progress / 60 / 60)
+        minutes = Double(progress / 60 % 60)
+        seconds = Double(progress % 60)
       }
     }
   }

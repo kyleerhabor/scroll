@@ -23,11 +23,7 @@ struct DeleteContentButtonView: View {
       Button("Delete", role: .destructive) {
         viewContext.delete(content)
 
-        do {
-          try viewContext.save()
-        } catch let err {
-          print(err)
-
+        if case .failure = viewContext.save() {
           didError = true
         }
       }

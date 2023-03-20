@@ -13,7 +13,7 @@ struct DeleteTitleButtonView: View {
   private(set) var title: Title
 
   @State private var isPresentingDeleteDialog: Bool = false
-  @State private var didFailToDelete: Bool = false
+  @State private var didError: Bool = false
 
   var body: some View {
     Button(role: .destructive) {
@@ -25,15 +25,11 @@ struct DeleteTitleButtonView: View {
       Button("Delete", role: .destructive) {
         viewContext.delete(title)
 
-        do {
-          try viewContext.save()
-        } catch let err {
-          print(err)
-
-          didFailToDelete = true
+        if case .failure = viewContext.save() {
+          didError = true
         }
       }
-    }.alert("Failed to delete title", isPresented: $didFailToDelete) {}
+    }.alert("Could not delete title", isPresented: $didError) {}
   }
 }
 

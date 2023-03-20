@@ -15,7 +15,7 @@ struct EntryFormView: View {
   @ObservedObject var entry: Entry
 
   @SceneStorage("notes") private var notes: String = ""
-  @State private var didErrorOnSubmit = false
+  @State private var didError = false
 
   var body: some View {
     Form {
@@ -43,14 +43,13 @@ struct EntryFormView: View {
       }
 
       FormControlView(purpose: purpose, complete: true) {
-        do {
-          try viewContext.save()
-          dismiss()
-        } catch let err {
-          print(err)
+        guard case .success = viewContext.save() else {
+          didError = true
 
-          didErrorOnSubmit = true
+          return
         }
+
+        dismiss()
       } cancel: {
         viewContext.rollback()
         dismiss()
@@ -59,7 +58,7 @@ struct EntryFormView: View {
     .formStyle(.grouped)
     .navigationTitle(titleLabel())
     .navigationSubtitle(entry.content!.title!)
-    .alert(submitErrorLabel(), isPresented: $didErrorOnSubmit) {}
+    .alert(submitErrorLabel(), isPresented: $didError) {}
     .onChange(of: notes) { notes in
       entry.notes = notes
     }

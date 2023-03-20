@@ -45,3 +45,15 @@ struct CoreDataStack {
     return self.getObject(from: id, with: context)
   }
 }
+
+extension NSManagedObjectContext {
+  func save() -> Result<Void, Error> {
+    do {
+      return .success(try self.save())
+    } catch let err {
+      print(err)
+
+      return .failure(err)
+    }
+  }
+}

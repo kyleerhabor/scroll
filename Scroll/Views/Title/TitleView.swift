@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct TitleView: View {
   @Environment(\.managedObjectContext) private var viewContext
@@ -14,12 +15,17 @@ struct TitleView: View {
   @ObservedObject var title: Title
 
   @State private var name: String
+  @State private var coverPhotos: [PhotosPickerItem] = []
   @State private var isPresentingCoverPicker = false
+  @State private var isPresentingCoverFilePrompt = false
+  @State private var isPresentingCoverPhotoPrompt = false
   @State private var isPresentingDeletePrompt = false
-  @State private var isHoveringCover = false
+  @State private var isHoveringOnCover = false
+  @State private var didErrorUpdatingTitle = false
+  @State private var didErrorUpdatingCover = false
 
   var body: some View {
-    let name = self.title.title!
+    let name = title.title!
 
     ScrollView {
       VStack(alignment: .leading, spacing: 12) {
@@ -31,30 +37,71 @@ struct TitleView: View {
               isPresentingCoverPicker = true
             } label: {
               // I experimented adding a stroked hover on hover and thought it was worse.
-              TitleCoverView(cover: self.title.cover)
+              TitleCoverView(cover: title.cover)
                 .frame(width: width, height: TitleCoverStyleModifier.height(from: width))
                 .titleCoverStyle()
-                .opacity(self.isHoveringCover ? 0.5 : 1)
+                // 0.625 - x - 0.75
+                .opacity(isHoveringOnCover ? 0.6875 : 1)
                 .onHover { isHovering in
-                  self.isHoveringCover = isHovering
-                }.fileImporter(isPresented: $isPresentingCoverPicker, allowedContentTypes: [.image]) { result in
-                  if case let .success(image) = result {
-                    if let data = try? Data(contentsOf: image) {
-                      self.title.cover = data
+                  isHoveringOnCover = isHovering
+                }.popover(isPresented: $isPresentingCoverPicker, arrowEdge: .trailing) {
+                  HStack {
+                    Button("Files") {
+                      isPresentingCoverFilePrompt = true
                     }
+                    
+                    Button("Photos") {
+                      isPresentingCoverPhotoPrompt = true
+                    }
+
+                    Button(role: .destructive) {
+                      title.cover = nil
+
+                      if case .failure = viewContext.save() {
+                        didErrorUpdatingCover = true
+                      }
+                    } label: {
+                      Image(systemName: "clear")
+                    }
+                  }.padding()
+                }.fileImporter(isPresented: $isPresentingCoverFilePrompt, allowedContentTypes: [.image]) { result in
+                  guard case let .success(image) = result,
+                        let data = try? Data(contentsOf: image) else {
+                    didErrorUpdatingCover = true
+
+                    return
                   }
-                }.onDrop(of: [.image], isTargeted: $isHoveringCover) { providers in
-                  providers.first?.loadDataRepresentation(for: .image) { data, err in
-                    if let data {
-                      // There better be a better way to do this.
-                      DispatchQueue.main.async {
-                        self.title.cover = data
+
+                  title.cover = data
+
+                  if case .failure = viewContext.save() {
+                    didErrorUpdatingCover = true
+                  }
+                }.photosPicker(
+                  isPresented: $isPresentingCoverPhotoPrompt,
+                  selection: $coverPhotos,
+                  maxSelectionCount: 1,
+                  matching: .images
+                ).onDrop(of: [.image], isTargeted: $isHoveringOnCover) { providers in
+                  _ = providers.first?.loadDataRepresentation(for: .image) { data, err in
+                    // There better be a better way to do this.
+                    DispatchQueue.main.async {
+                      guard let data else {
+                        didErrorUpdatingCover = true
+
+                        return
+                      }
+
+                      title.cover = data
+
+                      if case .failure = viewContext.save() {
+                        didErrorUpdatingCover = true
                       }
                     }
                   }
 
                   return true
-                }.animation(.default, value: self.isHoveringCover)
+                }.animation(.default, value: isHoveringOnCover)
             }
             .buttonStyle(.plain)
             .focusable(false)
@@ -84,24 +131,34 @@ struct TitleView: View {
           .font(.callout)
 
           VStack(alignment: .leading) {
-            TextField(text: $name) {}
+            TextField(text: $name, prompt: Text("Title")) {}
               .focusable(false)
               .textFieldStyle(.plain)
               .font(.title)
+              .bold()
               .onSubmit {
-                if self.name != self.title.title {
-                  self.title.title = self.name
+                let name = self.name.trimmingCharacters(in: .whitespacesAndNewlines)
+
+                guard !name.isEmpty else {
+                  self.name = title.title!
+
+                  return
                 }
 
-                do {
-                  try viewContext.save()
-                } catch let err {
-                  print(err)
+                guard name != title.title else {
+                  return
+                }
+
+                title.title = self.name
+
+                if case .failure = viewContext.save() {
+                  didErrorUpdatingTitle = true
                 }
               }
 
-            if let desc = self.title.desc {
+            if let desc = title.desc {
               Text(desc)
+                .textSelection(.enabled)
             }
           }
         }
@@ -111,8 +168,8 @@ struct TitleView: View {
         // On macOS, I'd prefer this be a LazyVGrid where the items dictate their size, as opposed to the columns.
         HStack {
           Group {
-            if self.title.contents?.isEmpty == false {
-              NavigationLink(value: Navigation.contents(self.title)) {
+            if title.contents?.isEmpty == false {
+              NavigationLink(value: Navigation.contents(title)) {
                 GroupBox {
                   Text("Contents")
                     .font(.title3)
@@ -130,19 +187,37 @@ struct TitleView: View {
     .navigationSubtitle(name)
     #endif
     .toolbar {
-      EditTitleButtonView(id: self.title.id)
-      DeleteTitleButtonView(title: self.title)
+      EditTitleButtonView(id: title.id)
+      DeleteTitleButtonView(title: title)
 
       Menu {
-        CreateContentButtonView(titleId: self.title.id)
+        CreateContentButtonView(titleId: title.id)
       } label: {
         Label("Add", systemImage: "plus")
       }
     }
-}
+    .alert("Could not update title", isPresented: $didErrorUpdatingTitle) {}
+    .alert("Could not update cover", isPresented: $didErrorUpdatingCover) {}
+    .onChange(of: coverPhotos) { photos in
+      photos.first!.loadTransferable(type: Data.self) { result in
+        guard case let .success(cover) = result,
+              let cover else {
+          didErrorUpdatingCover = true
 
-init(title: Title) {
-  self.title = title
-  self.name = title.title!
-}
+          return
+        }
+
+        title.cover = cover
+
+        if case .failure = viewContext.save() {
+          didErrorUpdatingCover = true
+        }
+      }
+    }
+  }
+
+  init(title: Title) {
+    self.title = title
+    self.name = title.title!
+  }
 }

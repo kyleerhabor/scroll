@@ -52,15 +52,13 @@ struct CreateContentFormView: View {
 
     content.chapter = chapter
 
-    do {
-      try viewContext.save()
-
-      dismiss()
-    } catch let err {
-      print(err)
-
+    guard case .success = viewContext.save() else {
       didError = true
+
+      return
     }
+
+    dismiss()
   }
 }
 

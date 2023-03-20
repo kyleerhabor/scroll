@@ -16,7 +16,7 @@ struct TitleCoverStyleModifier: ViewModifier {
     content
       .clipped()
       .cornerRadius(radius)
-      .shadow(radius: 8)
+      .shadow(radius: 2)
   }
   
   static func height(from width: CGFloat) -> CGFloat {
