@@ -14,6 +14,7 @@
 		0004CEDE29C0369400D1DBE9 /* EditContentFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0004CEDD29C0369400D1DBE9 /* EditContentFormView.swift */; };
 		0004CEE029C038D200D1DBE9 /* EditContentButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0004CEDF29C038D200D1DBE9 /* EditContentButtonView.swift */; };
 		0004CEE229C0396300D1DBE9 /* Standard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0004CEE129C0396300D1DBE9 /* Standard.swift */; };
+		0004EB6729C7A1F2005BB807 /* TitleContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0004EB6629C7A1F2005BB807 /* TitleContentsView.swift */; };
 		000E780429BEA6D600FF4679 /* CreateContentButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E780329BEA6D600FF4679 /* CreateContentButtonView.swift */; };
 		000E780629BEA95000FF4679 /* ContentFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E780529BEA95000FF4679 /* ContentFormView.swift */; };
 		000E780A29BEB45700FF4679 /* CreateContentFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E780929BEB45700FF4679 /* CreateContentFormView.swift */; };
@@ -72,6 +73,7 @@
 		0004CEDD29C0369400D1DBE9 /* EditContentFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContentFormView.swift; sourceTree = "<group>"; };
 		0004CEDF29C038D200D1DBE9 /* EditContentButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContentButtonView.swift; sourceTree = "<group>"; };
 		0004CEE129C0396300D1DBE9 /* Standard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Standard.swift; sourceTree = "<group>"; };
+		0004EB6629C7A1F2005BB807 /* TitleContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleContentsView.swift; sourceTree = "<group>"; };
 		000E780329BEA6D600FF4679 /* CreateContentButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateContentButtonView.swift; sourceTree = "<group>"; };
 		000E780529BEA95000FF4679 /* ContentFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFormView.swift; sourceTree = "<group>"; };
 		000E780929BEB45700FF4679 /* CreateContentFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateContentFormView.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				0082BFF429B4613600C35E79 /* TitleView.swift */,
+				0004EB6629C7A1F2005BB807 /* TitleContentsView.swift */,
 				0063764B29BA954B001EBA44 /* TitleCoverView.swift */,
 				000F2D5E29C3893A00B83815 /* TitleCoverStyleModifier.swift */,
 				000E780029BE857900FF4679 /* Button */,
@@ -461,6 +464,7 @@
 				000F2D5F29C3893A00B83815 /* TitleCoverStyleModifier.swift in Sources */,
 				0082BFC729B41AC300C35E79 /* CoreDataStack.swift in Sources */,
 				0063765729BE4080001EBA44 /* CreateTitleButtonView.swift in Sources */,
+				0004EB6729C7A1F2005BB807 /* TitleContentsView.swift in Sources */,
 				0063765329BC1E03001EBA44 /* View.swift in Sources */,
 				0082BFCC29B41AC300C35E79 /* ContentView.swift in Sources */,
 				0082BFCA29B41AC300C35E79 /* Scroll.xcdatamodeld in Sources */,

@@ -34,7 +34,7 @@ struct EditContentFormView: View {
       viewContext.rollback()
       dismiss()
     }
-    .alert("Could not edit content", isPresented: $didError) {}
+    .alert("Could not edit content.", isPresented: $didError) {}
     .onAppear {
       let content = getContent()
 

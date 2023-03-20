@@ -31,7 +31,7 @@ struct CreateContentFormView: View {
       pages: $pages,
       submit: submit,
       cancel: dismiss.callAsFunction
-    ).alert("Could not create content", isPresented: $didError) {}
+    ).alert("Could not create content.", isPresented: $didError) {}
   }
 
   func submit() {

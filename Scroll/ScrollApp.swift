@@ -17,6 +17,8 @@ struct ScrollApp: App {
         .environment(\.managedObjectContext, viewContext)
     }
 
+    // Note that every Entity.ID is a URL, so the preceding identifier actually needs to be unique for each type.
+
     WindowGroup("Create Title", id: "create-title-form") {
       CreateTitleFormView()
         .environment(\.managedObjectContext, childContext(from: viewContext))

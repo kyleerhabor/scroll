@@ -10,6 +10,7 @@ import SwiftUI
 struct TitleView: View {
   @Environment(\.managedObjectContext) private var viewContext
 
+  // TODO: Add title qualifiers to model.
   private(set) var title: Title
 
   @State private var isPresentingDeletePrompt = false
@@ -48,39 +49,29 @@ struct TitleView: View {
 
         Divider()
 
-        if let contents = title.contents, !contents.isEmpty {
-          Text("Contents")
-            .font(.title2)
-            .fontWeight(.medium)
-
-          let width: CGFloat = 128
-
-          LazyVGrid(columns: [.init(.adaptive(minimum: width))], alignment: .leading) {
-            ForEach(Array(contents)) { content in
-              NavigationLink(value: content) {
+        // On macOS, I'd prefer this be a LazyVGrid where the items dictate their size, as opposed to the columns.
+        HStack {
+          Group {
+            if title.contents?.isEmpty == false {
+              NavigationLink(value: Navigation.contents(title)) {
                 GroupBox {
-                  Text(content.title!)
-                }.contextMenu {
-                  EditContentButtonView(id: content.id)
-                  CreateEntryButtonView(contentId: content.id)
+                  Text("Contents")
+                    .font(.title3)
                 }
-              }.buttonStyle(.plain)
+              }
             }
-
-            // On iOS, I imagine adding a translucent accented button with the text and icon vertical.
-          }
+          }.buttonStyle(.plain)
         }
-      }.padding()
+      }
     }
+    .padding()
     // Looks better.
     #if os(macOS)
     .navigationTitle(name)
     #else
     .navigationSubtitle(name)
     #endif
-    .navigationDestination(for: Content.self) { content in
-      TContentView(content: content)
-    }.toolbar {
+    .toolbar {
       EditTitleButtonView(id: title.id)
       DeleteTitleButtonView(title: title)
 
