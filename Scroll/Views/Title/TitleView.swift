@@ -14,97 +14,36 @@ struct TitleView: View {
   // TODO: Add title qualifiers to model.
   @ObservedObject var title: Title
 
-  @State private var name: String
-  @State private var coverPhotos: [PhotosPickerItem] = []
-  @State private var isPresentingCoverPicker = false
-  @State private var isPresentingCoverFilePrompt = false
-  @State private var isPresentingCoverPhotoPrompt = false
-  @State private var isPresentingDeletePrompt = false
-  @State private var isHoveringOnCover = false
+  @State private var name = ""
+  @State private var qualifier = ""
+  @State private var cover: Data?
   @State private var didErrorUpdatingTitle = false
   @State private var didErrorUpdatingCover = false
+  @AppStorage("alwaysShowTitleQualifier") private var alwaysShowTitleQualifier = false
 
   var body: some View {
-    let name = title.title!
-
     ScrollView {
       VStack(alignment: .leading, spacing: 12) {
         HStack(alignment: .top) {
           let width: CGFloat = 160 // 128 * (5/4)
 
           VStack {
-            Button {
-              isPresentingCoverPicker = true
-            } label: {
-              // I experimented adding a stroked hover on hover and thought it was worse.
+            ModifiableImageView(image: $cover, didError: $didErrorUpdatingCover) {
               TitleCoverView(cover: title.cover)
                 .frame(width: width, height: TitleCoverStyleModifier.height(from: width))
                 .titleCoverStyle()
-                // 0.625 - x - 0.75
-                .opacity(isHoveringOnCover ? 0.6875 : 1)
-                .onHover { isHovering in
-                  isHoveringOnCover = isHovering
-                }.popover(isPresented: $isPresentingCoverPicker, arrowEdge: .trailing) {
-                  HStack {
-                    Button("Files") {
-                      isPresentingCoverFilePrompt = true
-                    }
-                    
-                    Button("Photos") {
-                      isPresentingCoverPhotoPrompt = true
-                    }
-
-                    Button(role: .destructive) {
-                      title.cover = nil
-
-                      if case .failure = viewContext.save() {
-                        didErrorUpdatingCover = true
-                      }
-                    } label: {
-                      Image(systemName: "clear")
-                    }
-                  }.padding()
-                }.fileImporter(isPresented: $isPresentingCoverFilePrompt, allowedContentTypes: [.image]) { result in
-                  guard case let .success(image) = result,
-                        let data = try? Data(contentsOf: image) else {
-                    didErrorUpdatingCover = true
-
-                    return
-                  }
-
-                  title.cover = data
-
-                  if case .failure = viewContext.save() {
-                    didErrorUpdatingCover = true
-                  }
-                }.photosPicker(
-                  isPresented: $isPresentingCoverPhotoPrompt,
-                  selection: $coverPhotos,
-                  maxSelectionCount: 1,
-                  matching: .images
-                ).onDrop(of: [.image], isTargeted: $isHoveringOnCover) { providers in
-                  _ = providers.first?.loadDataRepresentation(for: .image) { data, err in
-                    // There better be a better way to do this.
-                    DispatchQueue.main.async {
-                      guard let data else {
-                        didErrorUpdatingCover = true
-
-                        return
-                      }
-
-                      title.cover = data
-
-                      if case .failure = viewContext.save() {
-                        didErrorUpdatingCover = true
-                      }
-                    }
-                  }
-
-                  return true
-                }.animation(.default, value: isHoveringOnCover)
             }
             .buttonStyle(.plain)
             .focusable(false)
+            .onChange(of: title.cover) { cover in
+              self.cover = cover
+            }.onChange(of: cover) { cover in
+              title.cover = cover
+
+              if case .failure = viewContext.save() {
+                didErrorUpdatingCover = true
+              }
+            }
 
             VStack(spacing: 4) {
               if let contents = title.contents {
@@ -131,30 +70,58 @@ struct TitleView: View {
           .font(.callout)
 
           VStack(alignment: .leading) {
-            TextField(text: $name, prompt: Text("Title")) {}
-              .focusable(false)
-              .textFieldStyle(.plain)
-              .font(.title)
-              .bold()
-              .onSubmit {
-                let name = self.name.trimmingCharacters(in: .whitespacesAndNewlines)
+            VStack(spacing: 1) { // 0 would feel weird to move the mouse across. 2 has a bit too much spacing.
+              Group {
+                TextField(text: $name, prompt: Text("Title"), axis: .vertical) {}
+                  .font(.title)
+                  .onSubmit {
+                    let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
 
-                guard !name.isEmpty else {
-                  self.name = title.title!
+                    guard !name.isEmpty else {
+                      self.name = title.title!
 
-                  return
-                }
+                      return
+                    }
 
-                guard name != title.title else {
-                  return
-                }
+                    guard name != title.title else {
+                      return
+                    }
 
-                title.title = self.name
+                    title.title = name
 
-                if case .failure = viewContext.save() {
-                  didErrorUpdatingTitle = true
+                    if case .failure = viewContext.save() {
+                      didErrorUpdatingTitle = true
+                    }
+                  }.onChange(of: title.title) { title in
+                    self.name = title ?? ""
+                  }
+
+                if alwaysShowTitleQualifier || title.qualifier?.isEmpty == false {
+                  TextField(text: $qualifier, prompt: Text("Qualifier"), axis: .vertical) {}
+                    .font(.title3)
+                    .foregroundColor(.secondary)
+                    .onSubmit {
+                      let qualifier = qualifier.trimmingCharacters(in: .whitespacesAndNewlines)
+
+                      guard qualifier != title.qualifier else {
+                        return
+                      }
+
+                      title.qualifier = qualifier
+
+                      if case .failure = viewContext.save() {
+                        didErrorUpdatingTitle = true
+                      }
+                    }
                 }
               }
+              .focusable(false)
+              .textFieldStyle(.plain)
+              .bold()
+              .onChange(of: title.qualifier) { qualifier in
+                self.qualifier = qualifier ?? ""
+              }
+            }
 
             if let desc = title.desc {
               Text(desc)
@@ -180,12 +147,8 @@ struct TitleView: View {
         }.focusable(false)
       }.padding()
     }
-    // Looks better.
-    #if os(macOS)
-    .navigationTitle(name)
-    #else
-    .navigationSubtitle(name)
-    #endif
+    .navigationTitle(title.title ?? "")
+    .navigationSubtitle(title.qualifier ?? "")
     .toolbar {
       EditTitleButtonView(id: title.id)
       DeleteTitleButtonView(title: title)
@@ -198,26 +161,10 @@ struct TitleView: View {
     }
     .alert("Could not update title", isPresented: $didErrorUpdatingTitle) {}
     .alert("Could not update cover", isPresented: $didErrorUpdatingCover) {}
-    .onChange(of: coverPhotos) { photos in
-      photos.first!.loadTransferable(type: Data.self) { result in
-        guard case let .success(cover) = result,
-              let cover else {
-          didErrorUpdatingCover = true
-
-          return
-        }
-
-        title.cover = cover
-
-        if case .failure = viewContext.save() {
-          didErrorUpdatingCover = true
-        }
-      }
+    .onAppear {
+      name = title.title ?? ""
+      qualifier = title.qualifier ?? ""
+      cover = title.cover
     }
-  }
-
-  init(title: Title) {
-    self.title = title
-    self.name = title.title!
   }
 }

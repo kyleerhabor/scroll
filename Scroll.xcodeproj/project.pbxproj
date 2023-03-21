@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0004CECE29BEE67000D1DBE9 /* CreateTitleFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0004CECD29BEE67000D1DBE9 /* CreateTitleFormView.swift */; };
-		0004CED029BEE7FE00D1DBE9 /* TitleFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0004CECF29BEE7FE00D1DBE9 /* TitleFormView.swift */; };
 		0004CED229BEE8EC00D1DBE9 /* FormControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0004CED129BEE8EC00D1DBE9 /* FormControlView.swift */; };
-		0004CED429BEF59B00D1DBE9 /* EditTitleFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0004CED329BEF59B00D1DBE9 /* EditTitleFormView.swift */; };
 		0004CEDE29C0369400D1DBE9 /* EditContentFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0004CEDD29C0369400D1DBE9 /* EditContentFormView.swift */; };
 		0004CEE029C038D200D1DBE9 /* EditContentButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0004CEDF29C038D200D1DBE9 /* EditContentButtonView.swift */; };
 		0004CEE229C0396300D1DBE9 /* Standard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0004CEE129C0396300D1DBE9 /* Standard.swift */; };
@@ -46,6 +43,12 @@
 		0082BFE629B41AC600C35E79 /* ScrollUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFE529B41AC600C35E79 /* ScrollUITests.swift */; };
 		0082BFE829B41AC600C35E79 /* ScrollUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFE729B41AC600C35E79 /* ScrollUITestsLaunchTests.swift */; };
 		0082BFF529B4613600C35E79 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFF429B4613600C35E79 /* TitleView.swift */; };
+		00FA010029C90C6000CAF422 /* TitleFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FA00FF29C90C6000CAF422 /* TitleFormView.swift */; };
+		00FA010629C9290400CAF422 /* ModifiableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FA010529C9290400CAF422 /* ModifiableImageView.swift */; };
+		00FA010829C9517600CAF422 /* TitleFormCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FA010729C9517600CAF422 /* TitleFormCoverView.swift */; };
+		00FA010A29C9571E00CAF422 /* CreateTitleFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FA010929C9571E00CAF422 /* CreateTitleFormView.swift */; };
+		00FA010C29C957F900CAF422 /* EditTitleFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FA010B29C957F900CAF422 /* EditTitleFormView.swift */; };
+		00FA011429CA397800CAF422 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FA011329CA397800CAF422 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,10 +69,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0004CECD29BEE67000D1DBE9 /* CreateTitleFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTitleFormView.swift; sourceTree = "<group>"; };
-		0004CECF29BEE7FE00D1DBE9 /* TitleFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleFormView.swift; sourceTree = "<group>"; };
 		0004CED129BEE8EC00D1DBE9 /* FormControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormControlView.swift; sourceTree = "<group>"; };
-		0004CED329BEF59B00D1DBE9 /* EditTitleFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTitleFormView.swift; sourceTree = "<group>"; };
 		0004CEDD29C0369400D1DBE9 /* EditContentFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContentFormView.swift; sourceTree = "<group>"; };
 		0004CEDF29C038D200D1DBE9 /* EditContentButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContentButtonView.swift; sourceTree = "<group>"; };
 		0004CEE129C0396300D1DBE9 /* Standard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Standard.swift; sourceTree = "<group>"; };
@@ -110,6 +110,12 @@
 		0082BFE729B41AC600C35E79 /* ScrollUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0082BFF429B4613600C35E79 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		00DC480F29B7F97900CAB1AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00FA00FF29C90C6000CAF422 /* TitleFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleFormView.swift; sourceTree = "<group>"; };
+		00FA010529C9290400CAF422 /* ModifiableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiableImageView.swift; sourceTree = "<group>"; };
+		00FA010729C9517600CAF422 /* TitleFormCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleFormCoverView.swift; sourceTree = "<group>"; };
+		00FA010929C9571E00CAF422 /* CreateTitleFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTitleFormView.swift; sourceTree = "<group>"; };
+		00FA010B29C957F900CAF422 /* EditTitleFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTitleFormView.swift; sourceTree = "<group>"; };
+		00FA011329CA397800CAF422 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,9 +146,10 @@
 		0004CED629BFC15800D1DBE9 /* Form */ = {
 			isa = PBXGroup;
 			children = (
-				0004CECF29BEE7FE00D1DBE9 /* TitleFormView.swift */,
-				0004CECD29BEE67000D1DBE9 /* CreateTitleFormView.swift */,
-				0004CED329BEF59B00D1DBE9 /* EditTitleFormView.swift */,
+				00FA00FF29C90C6000CAF422 /* TitleFormView.swift */,
+				00FA010729C9517600CAF422 /* TitleFormCoverView.swift */,
+				00FA010929C9571E00CAF422 /* CreateTitleFormView.swift */,
+				00FA010B29C957F900CAF422 /* EditTitleFormView.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -308,6 +315,8 @@
 				000F2D7029C4EFF700B83815 /* DataView.swift */,
 				000F2D6E29C4EFAB00B83815 /* HiddenView.swift */,
 				0004CED129BEE8EC00D1DBE9 /* FormControlView.swift */,
+				00FA010529C9290400CAF422 /* ModifiableImageView.swift */,
+				00FA011329CA397800CAF422 /* SettingsView.swift */,
 				000E780129BEA6B400FF4679 /* Content */,
 				007ECE3B29C149C100286ED5 /* Entry */,
 				0063765C29BE787A001EBA44 /* Title */,
@@ -447,10 +456,12 @@
 			files = (
 				000F2D6729C3C07600B83815 /* Title+CoreDataClass.swift in Sources */,
 				000E780629BEA95000FF4679 /* ContentFormView.swift in Sources */,
-				0004CED029BEE7FE00D1DBE9 /* TitleFormView.swift in Sources */,
 				000F2D7529C52F2C00B83815 /* CreateEntryFormView.swift in Sources */,
 				0004CEE029C038D200D1DBE9 /* EditContentButtonView.swift in Sources */,
 				000F2D7129C4EFF700B83815 /* DataView.swift in Sources */,
+				00FA010A29C9571E00CAF422 /* CreateTitleFormView.swift in Sources */,
+				00FA011429CA397800CAF422 /* SettingsView.swift in Sources */,
+				00FA010629C9290400CAF422 /* ModifiableImageView.swift in Sources */,
 				007ECE3E29C14DC900286ED5 /* CreateEntryButtonView.swift in Sources */,
 				0063765529BD931C001EBA44 /* Model.swift in Sources */,
 				0004CEDE29C0369400D1DBE9 /* EditContentFormView.swift in Sources */,
@@ -458,7 +469,6 @@
 				000F2D6F29C4EFAB00B83815 /* HiddenView.swift in Sources */,
 				0004CED229BEE8EC00D1DBE9 /* FormControlView.swift in Sources */,
 				0063765929BE4369001EBA44 /* EditTitleButtonView.swift in Sources */,
-				0004CED429BEF59B00D1DBE9 /* EditTitleFormView.swift in Sources */,
 				0082BFC529B41AC300C35E79 /* ScrollApp.swift in Sources */,
 				000E780429BEA6D600FF4679 /* CreateContentButtonView.swift in Sources */,
 				000F2D5F29C3893A00B83815 /* TitleCoverStyleModifier.swift in Sources */,
@@ -467,16 +477,18 @@
 				0004EB6729C7A1F2005BB807 /* TitleContentsView.swift in Sources */,
 				0063765329BC1E03001EBA44 /* View.swift in Sources */,
 				0082BFCC29B41AC300C35E79 /* ContentView.swift in Sources */,
+				00FA010029C90C6000CAF422 /* TitleFormView.swift in Sources */,
 				0082BFCA29B41AC300C35E79 /* Scroll.xcdatamodeld in Sources */,
+				00FA010829C9517600CAF422 /* TitleFormCoverView.swift in Sources */,
 				000F2D7929C5F6DF00B83815 /* EntryFormChapterView.swift in Sources */,
 				007ECE3829C127E300286ED5 /* TContentView.swift in Sources */,
 				000F2D6829C3C07600B83815 /* Title+CoreDataProperties.swift in Sources */,
 				000F2D6D29C4D8A200B83815 /* EntryFormView.swift in Sources */,
 				0063765B29BE4C1C001EBA44 /* DeleteTitleButtonView.swift in Sources */,
-				0004CECE29BEE67000D1DBE9 /* CreateTitleFormView.swift in Sources */,
 				0004CEE229C0396300D1DBE9 /* Standard.swift in Sources */,
 				007ECE3A29C12B3200286ED5 /* DeleteContentButtonView.swift in Sources */,
 				0082BFF529B4613600C35E79 /* TitleView.swift in Sources */,
+				00FA010C29C957F900CAF422 /* EditTitleFormView.swift in Sources */,
 				000E780A29BEB45700FF4679 /* CreateContentFormView.swift in Sources */,
 				000F2D7729C5655500B83815 /* EntryFormEpisodeView.swift in Sources */,
 			);

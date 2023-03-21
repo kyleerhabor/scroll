@@ -9,7 +9,13 @@ import SwiftUI
 
 @main
 struct ScrollApp: App {
-  let viewContext = CoreDataStack.shared.container.viewContext
+  @Environment(\.scenePhase) private var scenePhase
+
+  private let viewContext = CoreDataStack.shared.container.viewContext
+  private let createTitleViewContext = CoreDataStack.shared.container.viewContext.child()
+  private let editTitleViewContext = CoreDataStack.shared.container.viewContext.child()
+  private let editContentViewContext = CoreDataStack.shared.container.viewContext.child()
+  private let createEntryViewContext = CoreDataStack.shared.container.viewContext.child()
 
   var body: some Scene {
     WindowGroup {
@@ -21,7 +27,13 @@ struct ScrollApp: App {
 
     WindowGroup("Create Title", id: "create-title-form") {
       CreateTitleFormView()
-        .environment(\.managedObjectContext, childContext(from: viewContext))
+        // I need to create some kind of store to hold these.
+        .environment(\.managedObjectContext, createTitleViewContext)
+        .onDisappear {
+          if viewContext.hasChanges {
+            _ = try? viewContext.save() as Void
+          }
+        }
     }
 
     // For views where the ID is nil (seems to be from restoration not being possible; don't know how), I'd like to show
@@ -30,7 +42,12 @@ struct ScrollApp: App {
     WindowGroup("Edit Title", id: "edit-title-form", for: Title.ID.self) { $id in
       if let id {
         EditTitleFormView(id: id)
-          .environment(\.managedObjectContext, viewContext)
+          .environment(\.managedObjectContext, editTitleViewContext)
+          .onDisappear {
+            if viewContext.hasChanges {
+              _ = try? viewContext.save() as Void
+            }
+          }
       }
     }.commandsRemoved()
 
@@ -44,22 +61,19 @@ struct ScrollApp: App {
     WindowGroup("Edit Content", id: "edit-content-form", for: Content.ID.self) { $id in
       if let id {
         EditContentFormView(id: id)
-          .environment(\.managedObjectContext, childContext(from: viewContext))
+          .environment(\.managedObjectContext, editContentViewContext)
       }
     }.commandsRemoved()
 
     WindowGroup("Create Entry", id: "create-entry-form", for: Content.ID.self) { $id in
       if let id {
         CreateEntryFormView(contentId: id)
-          .environment(\.managedObjectContext, childContext(from: viewContext))
+          .environment(\.managedObjectContext, createEntryViewContext)
       }
     }.commandsRemoved()
-  }
 
-  func childContext(from context: NSManagedObjectContext) -> NSManagedObjectContext {
-    let child = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    child.parent = viewContext
-
-    return child
+    Settings {
+      SettingsView()
+    }
   }
 }

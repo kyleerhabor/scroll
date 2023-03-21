@@ -9,10 +9,10 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-  // For some reason, creating a title appends to the list when using .objectID as the keypath. Refreshing fixes the
-  // order, so I have a slight feeling it's caused by temporary IDs.
-  @FetchRequest(sortDescriptors: [.init(\.title)],
-                animation: .default)
+  @FetchRequest(
+    sortDescriptors: [.init(\.title), .init(\.qualifier)],
+    animation: .default
+  )
   private var titles: FetchedResults<Title>
 
   var body: some View {
@@ -33,16 +33,23 @@ struct ContentView: View {
                   .titleCoverStyle()
 
                 let name = title.title!
+                let qualifier = title.qualifier
 
                 // The line limit with reserved spacing is enforced to align the titles (specifically the cover images)
                 // vertically. A limit of 1 is compact and too short for many titles; a limit of 3 is too spacious and
                 // still suseptible to longer titles; a limit of 2 catches many titles while missing some (e.g. "Made in
                 // Abyss: The Golden City of the Scorching Sun"), but is "just right" for how much space it occupies.
-                Text(name)
-                  .font(.callout)
-                  .bold()
-                  .lineLimit(2, reservesSpace: true)
-                  .help(name)
+                Group {
+                  if let qualifier {
+                    Text(name) + Text(verbatim: " ") + Text(qualifier).foregroundColor(.secondary)
+                  } else {
+                    Text(name)
+                  }
+                }
+                .font(.callout)
+                .bold()
+                .lineLimit(2, reservesSpace: true)
+                .help(qualifier == nil ? name : "\(name) (\(qualifier!))")
               }
             }
             .frame(width: width)

@@ -21,8 +21,8 @@ struct CoreDataStack {
     }
 
     container.loadPersistentStores { (storeDescription, error) in
-      if let error = error as? NSError {
-        fatalError("Unresolved error \(error), \(error.userInfo)")
+      if let error {
+        fatalError("Error loading Core Data persistent stores: \(error)")
       }
     }
 
@@ -55,5 +55,12 @@ extension NSManagedObjectContext {
 
       return .failure(err)
     }
+  }
+
+  func child() -> Self {
+    let child = Self(concurrencyType: .mainQueueConcurrencyType)
+    child.parent = self
+
+    return child
   }
 }
