@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TitleCoverView: View {
-  private(set) var cover: Data?
+  var cover: Data?
 
   var body: some View {
     if let data = cover,

@@ -116,6 +116,7 @@
 		00FA010929C9571E00CAF422 /* CreateTitleFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTitleFormView.swift; sourceTree = "<group>"; };
 		00FA010B29C957F900CAF422 /* EditTitleFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTitleFormView.swift; sourceTree = "<group>"; };
 		00FA011329CA397800CAF422 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		00FA011529CA52E700CAF422 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +248,7 @@
 		0082BFB829B41AC200C35E79 = {
 			isa = PBXGroup;
 			children = (
+				00FA011529CA52E700CAF422 /* README.md */,
 				0082BFC329B41AC300C35E79 /* Scroll */,
 				0082BFDA29B41AC600C35E79 /* ScrollTests */,
 				0082BFE429B41AC600C35E79 /* ScrollUITests */,
