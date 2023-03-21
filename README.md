@@ -1,3 +1,3 @@
 # Scroll
 
-Manage a local list of titles (films, books, etc.) you've seen.
+Manage a local list of titles you've seen.
