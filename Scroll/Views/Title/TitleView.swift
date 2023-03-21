@@ -11,7 +11,6 @@ import PhotosUI
 struct TitleView: View {
   @Environment(\.managedObjectContext) private var viewContext
 
-  // TODO: Add title qualifiers to model.
   @ObservedObject var title: Title
 
   @State private var name = ""
