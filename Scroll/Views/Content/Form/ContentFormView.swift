@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct ContentFormView: View {
-  private(set) var purpose: FormPurpose
-  @Binding private(set) var title: String
-  @Binding private(set) var kind: Content.Kind?
-  @Binding private(set) var hours: Int
-  @Binding private(set) var minutes: Int
-  @Binding private(set) var seconds: Int
-  @Binding private(set) var pages: Int
-  private(set) var submit: () -> Void
-  private(set) var cancel: () -> Void
+  var purpose: FormPurpose
+  @Binding var title: String
+  @Binding var description: String
+  @Binding var kind: Content.Kind?
+  @Binding var hours: Int
+  @Binding var minutes: Int
+  @Binding var seconds: Int
+  @Binding var pages: Int
+  var submit: () -> Void
+  var cancel: () -> Void
 
   private let durationFormatter = {
     let formatter = NumberFormatter()
@@ -36,23 +37,29 @@ struct ContentFormView: View {
     return formatter
   }()
 
-  typealias MaybeKind = Content.Kind?
+  typealias Kind = Content.Kind
 
   var body: some View {
     Form {
       TextField("Title", text: $title)
 
       Picker("Kind", selection: $kind) {
-        // Who the FUCK thought it was a good idea to require this for optional values?
         Text("None")
-          .tag(nil as MaybeKind)
+          .tag(nil as Kind?)
 
         Text("Episode")
-          .tag(Content.Kind.episode as MaybeKind)
+          .tag(Kind.episode as Kind?)
 
         Text("Chapter")
-          .tag(Content.Kind.chapter as MaybeKind)
+          .tag(Kind.chapter as Kind?)
       }.pickerStyle(.inline)
+
+      Section {
+        TextEditor(text: $description)
+      } header: {
+        Text("Description")
+        Text(descriptionLabel())
+      }
 
       Section("Episode") {
         // Creating a Stepper with a format of .timeDuration seems to trigger some form configuration error.
@@ -79,20 +86,24 @@ struct ContentFormView: View {
       FormControlView(purpose: purpose, complete: isComplete(), submit: submit, cancel: cancel)
     }
     .formStyle(.grouped)
-    .navigationTitle(title(purpose: purpose))
+    .navigationTitle(titleLabel(for: purpose))
   }
 
-  func title(purpose: FormPurpose) -> String {
+  func titleLabel(for purpose: FormPurpose) -> String {
     switch purpose {
       case .create: return "Create Content"
       case .edit: return "Edit Content"
     }
   }
 
-  func label(with purpose: FormPurpose) -> String {
-    switch purpose {
-      case .create: return "Create"
-      case .edit: return "Save"
+  func descriptionLabel() -> String {
+    guard let kind else {
+      return "An overview or summary of the content."
+    }
+
+    switch kind {
+      case .episode: return "An overview or summary of the episode."
+      case .chapter: return "An overview or summary of the chapter."
     }
   }
 
@@ -106,6 +117,8 @@ struct ContentFormView_Previews: PreviewProvider {
     ContentFormView(
       purpose: .create,
       title: .constant("Invasion"),
+      // https://en.wikipedia.org/wiki/Crest_of_the_Stars#Anime #1
+      description: .constant("The ever-expanding Abh Empire of Mankind, led by the Dusanyo, invades the Hyde Star System. It becomes clear that direct governance of the surface world is not part of their plans. In exchange for allowing its citizens the right to freely travel to other star systems as well as elect the territorial lord from amongst themselves, Rock Lynn, who was then the president, surrenders their sovereignty. But he did not consult his immediate subordinates, not even his friend and executive secretary Teal Clint, who also served as surrogate parent for his son. And so, although he earned an Abh nobility for his family, he left everyone else feelinng betrayed. Years later, having spent several years on the planet Delktoe learning to read and write in Baronh, the Abh language, Jinto takes up his status as a noble and is on his way to the capital to attend military school."),
       kind: .constant(.episode),
       hours: .constant(0),
       minutes: .constant(25),

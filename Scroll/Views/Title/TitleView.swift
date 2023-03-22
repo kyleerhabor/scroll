@@ -130,13 +130,17 @@ struct TitleView: View {
 
         Divider()
 
-        Text("Contents")
-          .font(.title2)
-          .fontWeight(.semibold)
+        if let total = title.contents?.count, total > 0 {
+          Text("Contents")
+            .font(.title2)
+            .fontWeight(.semibold)
 
-        TitleContentsView(title: title)
-          .frame(minHeight: 128, maxHeight: 256)
-
+          TitleContentsView(title: title)
+            .listStyle(.plain)
+            // At most, ~12 
+            .frame(height: min(CGFloat(total * 24), 12 * 24))
+            .cornerRadius(6)
+        }
       }.padding()
     }
     .navigationTitle(title.title ?? "")

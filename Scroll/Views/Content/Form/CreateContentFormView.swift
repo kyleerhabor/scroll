@@ -11,8 +11,9 @@ struct CreateContentFormView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.managedObjectContext) private var viewContext
 
-  private(set) var titleId: Title.ID
+  var titleId: Title.ID
   @State private var name = ""
+  @State private var description = ""
   @State private var kind: Content.Kind?
   @State private var hours = 0
   @State private var minutes = 0
@@ -24,6 +25,7 @@ struct CreateContentFormView: View {
     ContentFormView(
       purpose: .create,
       title: $name,
+      description: $description,
       kind: $kind,
       hours: $hours,
       minutes: $minutes,
@@ -38,6 +40,7 @@ struct CreateContentFormView: View {
     let content = Content(context: viewContext)
     content.titleRef = (CoreDataStack.getObject(from: titleId, with: viewContext) as! Title)
     content.title = name
+    content.desc = description
     content.kind = kind
 
     let episode = Episode(context: viewContext)

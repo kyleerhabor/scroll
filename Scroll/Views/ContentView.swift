@@ -49,7 +49,7 @@ struct ContentView: View {
                 .font(.callout)
                 .bold()
                 .lineLimit(2, reservesSpace: true)
-                .help(qualifier == nil ? name : "\(name) (\(qualifier!))")
+                .help(title.name!)
               }
             }
             .frame(width: width)

@@ -8,22 +8,26 @@
 import SwiftUI
 
 struct TContentView: View { // T[itle]ContentView to not conflict with ContentView
-  private(set) var content: Content
+  var content: Content
 
   var body: some View {
-    let title = content.title!
+    let title = content.title ?? ""
+    let parent = content.titleRef
 
     // This doesn't appear centered for some reason.
-    VStack {
-      Text(title)
-        .font(.title)
-        .fontWeight(.medium)
+    ScrollView {
+      VStack {
+        Text(title)
+          .font(.title)
+          .bold()
+
+        if let description = content.desc {
+          Text(description)
+        }
+      }.padding()
     }
-    #if os(macOS)
     .navigationTitle(title)
-    #else
-    .navigationSubtitle(title)
-    #endif
+    .navigationSubtitle((parent?.isFault == false ? parent?.name : nil) ?? "")
     .toolbar {
       EditContentButtonView(id: content.id)
 

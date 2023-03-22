@@ -13,6 +13,7 @@ struct EditContentFormView: View {
 
   private(set) var id: Content.ID
   @State private var title = ""
+  @State private var description = ""
   @State private var kind: Content.Kind?
   @State private var hours = 0
   @State private var minutes = 0
@@ -24,6 +25,7 @@ struct EditContentFormView: View {
     ContentFormView(
       purpose: .edit,
       title: $title,
+      description: $description,
       kind: $kind,
       hours: $hours,
       minutes: $minutes,
@@ -40,6 +42,10 @@ struct EditContentFormView: View {
 
       title = content.title!
       kind = content.kind
+
+      if let description = content.desc {
+        self.description = description
+      }
 
       if let episode = content.episode {
         // This sucks.
@@ -61,6 +67,7 @@ struct EditContentFormView: View {
   func submit() {
     let content = getContent()
     content.title = title
+    content.desc = description
     content.kind = kind
 
     let episode = content.episode ?? createEpisode(for: content)

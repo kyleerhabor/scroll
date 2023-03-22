@@ -36,8 +36,4 @@ extension Title {
   @NSManaged public func removeFromContents(_ values: NSSet)
 }
 
-extension Title: Identifiable {
-  public var id: URL {
-    self.objectID.uriRepresentation()
-  }
-}
+extension Title: Identifiable {}

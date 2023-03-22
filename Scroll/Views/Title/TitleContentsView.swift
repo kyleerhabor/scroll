@@ -37,11 +37,8 @@ struct TitleContentsView: View {
           }
         }
       }
-    }
-    .navigationTitle("Contents")
-    .navigationSubtitle(title.title ?? "")
     // Since there could have been many contents the user tried to delete in one, the error message could be improved.
-    .alert("Could not delete content.", isPresented: $didError) {}
+    }.alert("Could not delete content.", isPresented: $didError) {} //
   }
 
   init(title: Title) {

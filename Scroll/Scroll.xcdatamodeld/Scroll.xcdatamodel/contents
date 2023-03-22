@@ -5,6 +5,7 @@
         <relationship name="content" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Content" inverseName="chapter" inverseEntity="Content"/>
     </entity>
     <entity name="Content" representedClassName="Content" syncable="YES" codeGenerationType="class">
+        <attribute name="desc" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
         <relationship name="chapter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chapter" inverseName="content" inverseEntity="Chapter"/>

@@ -14,7 +14,6 @@ struct ScrollApp: App {
   private let viewContext = CoreDataStack.shared.container.viewContext
   private let createTitleViewContext = CoreDataStack.shared.container.viewContext.child()
   private let editTitleViewContext = CoreDataStack.shared.container.viewContext.child()
-  private let editContentViewContext = CoreDataStack.shared.container.viewContext.child()
   private let createEntryViewContext = CoreDataStack.shared.container.viewContext.child()
 
   var body: some Scene {
@@ -61,7 +60,7 @@ struct ScrollApp: App {
     WindowGroup("Edit Content", id: "edit-content-form", for: Content.ID.self) { $id in
       if let id {
         EditContentFormView(id: id)
-          .environment(\.managedObjectContext, editContentViewContext)
+          .environment(\.managedObjectContext, viewContext)
       }
     }.commandsRemoved()
 
