@@ -28,6 +28,7 @@ struct TitleFormCoverView: View {
 
       HStack {
         Text("Cover")
+          .font(.headline)
           .fontWeight(.medium)
 
         FormControlView(purpose: .edit, complete: true) {

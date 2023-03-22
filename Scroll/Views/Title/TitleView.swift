@@ -48,10 +48,6 @@ struct TitleView: View {
               if let contents = title.contents {
                 let kinds = Dictionary(grouping: contents, by: \.kind)
 
-                if let count = kinds[nil]?.count, count > 0 {
-                  LabeledContent("Content", value: "\(count)")
-                }
-
                 if let count = kinds[.episode]?.count, count > 0 {
                   LabeledContent("Episodes", value: "\(count)")
                 }
@@ -59,14 +55,17 @@ struct TitleView: View {
                 if let count = kinds[.chapter]?.count, count > 0 {
                   LabeledContent("Chapters", value: "\(count)")
                 }
+
+                if let count = kinds[nil]?.count, count > 0 {
+                  LabeledContent("Content (None)", value: "\(count)")
+                }
               }
             }
-            .padding(.horizontal, 4)
             .labeledContentStyle(.table)
+            .font(.callout)
+            .padding(.horizontal, 4)
           }
           .frame(width: width)
-          .labeledContentStyle(.table)
-          .font(.callout)
 
           VStack(alignment: .leading) {
             VStack(spacing: 1) { // 0 would feel weird to move the mouse across. 2 has a bit too much spacing.
@@ -131,19 +130,13 @@ struct TitleView: View {
 
         Divider()
 
-        // On macOS, I'd prefer this be a LazyVGrid where the items dictate their size, as opposed to the columns.
-        HStack {
-          Group {
-            if title.contents?.isEmpty == false {
-              NavigationLink(value: Navigation.contents(title)) {
-                GroupBox {
-                  Text("Contents")
-                    .font(.title3)
-                }
-              }
-            }
-          }.buttonStyle(.plain)
-        }.focusable(false)
+        Text("Contents")
+          .font(.title2)
+          .fontWeight(.semibold)
+
+        TitleContentsView(title: title)
+          .frame(minHeight: 128, maxHeight: 256)
+
       }.padding()
     }
     .navigationTitle(title.title ?? "")

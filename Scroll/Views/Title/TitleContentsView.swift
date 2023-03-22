@@ -16,6 +16,11 @@ struct TitleContentsView: View {
   @State private var didError = false
 
   var body: some View {
+    // Some contents (such as light novel chapters) have cover art which could look better than a vertical list of text.
+    // However, a lot of contents don't, such as TV episodes where they instead opt to use a frame as the cover, which
+    // is often awkward. I think providing an option for the user to set whether or not the list should use cover images
+    // would be an interesting solution. The only problem, then, is whether or not it should apply to all contents, a
+    // subset (e.g. in a certain group), a rule, etc.
     List {
       ForEach(contents) { content in
         NavigationLink(value: content) {
@@ -34,7 +39,7 @@ struct TitleContentsView: View {
       }
     }
     .navigationTitle("Contents")
-    .navigationSubtitle(title.title!)
+    .navigationSubtitle(title.title ?? "")
     // Since there could have been many contents the user tried to delete in one, the error message could be improved.
     .alert("Could not delete content.", isPresented: $didError) {}
   }
