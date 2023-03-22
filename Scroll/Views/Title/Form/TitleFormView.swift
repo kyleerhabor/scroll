@@ -36,14 +36,20 @@ struct TitleFormView: View {
         title.qualifier = qualifier.trimmingCharacters(in: .whitespacesAndNewlines)
       }
 
-      Button("Cover") {
-        isPresentingCover = true
-      }.sheet(isPresented: $isPresentingCover) {
-        TitleFormCoverView(title: title)
-          .environment(\.managedObjectContext, viewContext.child())
-          .onDisappear {
-            cover = title.cover
-          }
+      LabeledContent {
+        Button("Cover") {
+          isPresentingCover = true
+        }.sheet(isPresented: $isPresentingCover) {
+          TitleFormCoverView(title: title)
+            .foregroundColor(.primary)
+            .environment(\.managedObjectContext, viewContext.child())
+            .onDisappear {
+              cover = title.cover
+            }
+        }
+      } label: {
+        Text("Cover")
+        Text("Should be 2x3 dimensions.")
       }
 
       Section {

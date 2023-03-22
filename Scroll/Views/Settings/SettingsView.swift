@@ -13,7 +13,6 @@ struct SettingsView: View {
   var body: some View {
     Form {
       Toggle("Always display title qualifier text field", isOn: $alwaysShowTitleQualifier)
-        .border(.orange)
     }.padding()
   }
 }

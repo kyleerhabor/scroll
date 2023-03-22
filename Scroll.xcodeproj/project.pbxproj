@@ -318,12 +318,20 @@
 				000F2D6E29C4EFAB00B83815 /* HiddenView.swift */,
 				0004CED129BEE8EC00D1DBE9 /* FormControlView.swift */,
 				00FA010529C9290400CAF422 /* ModifiableImageView.swift */,
-				00FA011329CA397800CAF422 /* SettingsView.swift */,
 				000E780129BEA6B400FF4679 /* Content */,
 				007ECE3B29C149C100286ED5 /* Entry */,
+				00FA011629CA743B00CAF422 /* Settings */,
 				0063765C29BE787A001EBA44 /* Title */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		00FA011629CA743B00CAF422 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				00FA011329CA397800CAF422 /* SettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
