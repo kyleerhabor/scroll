@@ -64,3 +64,5 @@ extension NSManagedObjectContext {
     return child
   }
 }
+
+extension NSManagedObjectContext: Identifiable {}

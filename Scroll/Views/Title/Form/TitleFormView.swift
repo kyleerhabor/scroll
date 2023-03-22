@@ -18,9 +18,9 @@ struct TitleFormView: View {
   @State private var qualifier = ""
   @State private var description = ""
   @State private var cover: Data?
-  @State private var isPresentingCover = false
   @State private var didError = false
   @State private var didErrorUpdatingCover = false
+  @State private var coverViewContext: NSManagedObjectContext?
 
   var body: some View {
     Form {
@@ -38,14 +38,13 @@ struct TitleFormView: View {
 
       LabeledContent {
         Button("Cover") {
-          isPresentingCover = true
-        }.sheet(isPresented: $isPresentingCover) {
+          coverViewContext = viewContext.child()
+        }.sheet(item: $coverViewContext) {
+          cover = title.cover
+        } content: { context in
           TitleFormCoverView(title: title)
             .foregroundColor(.primary)
-            .environment(\.managedObjectContext, viewContext.child())
-            .onDisappear {
-              cover = title.cover
-            }
+            .environment(\.managedObjectContext, context)
         }
       } label: {
         Text("Cover")
