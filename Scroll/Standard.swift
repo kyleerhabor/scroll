@@ -21,6 +21,10 @@ func decrement<T: SimpleAdditive>(_ number: T) -> T {
 
 extension Duration {
   static let hour: Self = .seconds(3600)
+
+  func length() -> Self.TimeFormatStyle.Pattern {
+    return self >= .hour ? .hourMinuteSecond : .minuteSecond
+  }
 }
 
 extension URL {
