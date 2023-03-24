@@ -28,6 +28,32 @@ extension Title {
 
     return "\(title) (\(qualifier))"
   }
+
+  // This feels off. It's in sync, but it still has coupling to it.
+  //
+  // THIS WHOLE THING IS BAD. AHHHH
+
+  var uiTitle: String {
+    get { self.title ?? "" }
+    set { self.title = newValue.isEmpty ? nil : newValue }
+  }
+
+  // This is especially suspect, given there are many ways one would want to format this in the UI.
+  var uiTitleLabel: String {
+    get {
+      self.uiTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+  }
+
+  var uiQualifier: String {
+    get { self.qualifier ?? "" }
+    set { self.qualifier = newValue.isEmpty ? nil : newValue }
+  }
+
+  var uiDescription: String {
+    get { self.desc ?? "" }
+    set { self.desc = newValue.isEmpty ? nil : newValue }
+  }
 }
 
 extension Content {

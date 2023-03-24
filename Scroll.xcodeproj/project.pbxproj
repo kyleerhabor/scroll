@@ -24,6 +24,7 @@
 		000F2D7529C52F2C00B83815 /* CreateEntryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F2D7429C52F2C00B83815 /* CreateEntryFormView.swift */; };
 		000F2D7729C5655500B83815 /* EntryFormEpisodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F2D7629C5655500B83815 /* EntryFormEpisodeView.swift */; };
 		000F2D7929C5F6DF00B83815 /* EntryFormChapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F2D7829C5F6DE00B83815 /* EntryFormChapterView.swift */; };
+		0060268B29CC0C2700E2D62B /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0060268A29CC0C2700E2D62B /* StateView.swift */; };
 		0063764C29BA954B001EBA44 /* TitleCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063764B29BA954B001EBA44 /* TitleCoverView.swift */; };
 		0063765329BC1E03001EBA44 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063765229BC1E03001EBA44 /* View.swift */; };
 		0063765529BD931C001EBA44 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063765429BD931C001EBA44 /* Model.swift */; };
@@ -86,6 +87,7 @@
 		000F2D7429C52F2C00B83815 /* CreateEntryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEntryFormView.swift; sourceTree = "<group>"; };
 		000F2D7629C5655500B83815 /* EntryFormEpisodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormEpisodeView.swift; sourceTree = "<group>"; };
 		000F2D7829C5F6DE00B83815 /* EntryFormChapterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormChapterView.swift; sourceTree = "<group>"; };
+		0060268A29CC0C2700E2D62B /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
 		0063764B29BA954B001EBA44 /* TitleCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCoverView.swift; sourceTree = "<group>"; };
 		0063765229BC1E03001EBA44 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		0063765429BD931C001EBA44 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				0082BFCB29B41AC300C35E79 /* ContentView.swift */,
+				0060268A29CC0C2700E2D62B /* StateView.swift */,
 				000F2D7029C4EFF700B83815 /* DataView.swift */,
 				000F2D6E29C4EFAB00B83815 /* HiddenView.swift */,
 				0004CED129BEE8EC00D1DBE9 /* FormControlView.swift */,
@@ -468,6 +471,7 @@
 				000E780629BEA95000FF4679 /* ContentFormView.swift in Sources */,
 				000F2D7529C52F2C00B83815 /* CreateEntryFormView.swift in Sources */,
 				0004CEE029C038D200D1DBE9 /* EditContentButtonView.swift in Sources */,
+				0060268B29CC0C2700E2D62B /* StateView.swift in Sources */,
 				000F2D7129C4EFF700B83815 /* DataView.swift in Sources */,
 				00FA010A29C9571E00CAF422 /* CreateTitleFormView.swift in Sources */,
 				00FA011429CA397800CAF422 /* SettingsView.swift in Sources */,

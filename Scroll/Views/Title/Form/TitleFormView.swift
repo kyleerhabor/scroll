@@ -14,34 +14,23 @@ struct TitleFormView: View {
   @ObservedObject var title: Title
   var purpose: FormPurpose
 
-  @State private var name = ""
-  @State private var qualifier = ""
-  @State private var description = ""
-  @State private var cover: Data?
   @State private var didError = false
   @State private var didErrorUpdatingCover = false
   @State private var coverViewContext: NSManagedObjectContext?
 
   var body: some View {
     Form {
-      TextField("Name", text: $name)
-        .onChange(of: name) { name in
-          title.title = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        }
+      TextField("Name", text: $title.uiTitle)
 
-      TextField(text: $qualifier) {
+      TextField(text: $title.uiQualifier) {
         Text("Qualifier")
         Text("An identifier to help disambiguate against titles with similar names.")
-      }.onChange(of: qualifier) { qualifier in
-        title.qualifier = qualifier.trimmingCharacters(in: .whitespacesAndNewlines)
       }
 
       LabeledContent {
         Button("Cover") {
           coverViewContext = viewContext.child()
-        }.sheet(item: $coverViewContext) {
-          cover = title.cover
-        } content: { context in
+        }.sheet(item: $coverViewContext) { context in
           TitleFormCoverView(title: title)
             .foregroundColor(.primary)
             .environment(\.managedObjectContext, context)
@@ -52,16 +41,17 @@ struct TitleFormView: View {
       }
 
       Section {
-        TextEditor(text: $description)
-          .onChange(of: description) { description in
-            title.desc = description
-          }
+        TextEditor(text: $title.uiDescription)
       } header: {
         Text("Description")
         Text("A basic, descriptive overview of the title.")
       }
 
       FormControlView(purpose: purpose, complete: isComplete()) {
+        title.uiTitle = title.uiTitleLabel
+        title.uiQualifier = title.uiQualifier.trimmingCharacters(in: .whitespacesAndNewlines)
+        title.uiDescription = title.uiDescription.trimmingCharacters(in: .whitespacesAndNewlines)
+
         guard case .success = viewContext.save() else {
           didError = true
 
@@ -76,13 +66,6 @@ struct TitleFormView: View {
     }
     .formStyle(.grouped)
     .navigationTitle(titleLabel())
-    .onAppear { // This is being called on exit for some reason.
-      // This is problematic, since @SceneStorage can't actually be used, unless I were to wrap it in some extra type.
-      name = title.title ?? ""
-      qualifier = title.qualifier ?? ""
-      description = title.desc ?? ""
-      cover = title.cover
-    }
   }
 
   func titleLabel() -> String {
@@ -100,7 +83,7 @@ struct TitleFormView: View {
   }
 
   func isComplete() -> Bool {
-    title.title?.isEmpty == false
+    !title.uiTitleLabel.isEmpty
   }
 }
 

@@ -65,11 +65,6 @@ struct ContentView: View {
         TitleView(title: title)
       }.navigationDestination(for: Content.self) { content in
         TContentView(content: content)
-      }.navigationDestination(for: Navigation.self) { location in
-        switch location {
-          case .contents(let title):
-            TitleContentsView(title: title)
-        }
       }.toolbar {
         // In the future, I'd like to provide users the ability to create or *import* titles (likely in some file format).
         // When that happens, this will likely be a Menu.

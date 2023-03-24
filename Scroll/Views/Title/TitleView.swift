@@ -68,7 +68,7 @@ struct TitleView: View {
           .frame(width: width)
 
           VStack(alignment: .leading) {
-            VStack(spacing: 1) { // 0 would feel weird to move the mouse across. 2 has a bit too much spacing.
+            VStack(spacing: 1) {
               Group {
                 TextField(text: $name, prompt: Text("Title"), axis: .vertical) {}
                   .font(.title)
@@ -137,8 +137,7 @@ struct TitleView: View {
 
           TitleContentsView(title: title)
             .listStyle(.plain)
-            // At most, ~12 
-            .frame(height: min(CGFloat(total * 24), 12 * 24))
+            .frame(height: min(CGFloat(total * 24), 12 * 24)) // At most, ~12
             .cornerRadius(6)
         }
       }.padding()

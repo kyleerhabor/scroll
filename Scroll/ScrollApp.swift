@@ -9,8 +9,6 @@ import SwiftUI
 
 @main
 struct ScrollApp: App {
-  @Environment(\.scenePhase) private var scenePhase
-
   private let viewContext = CoreDataStack.shared.container.viewContext
   private let createTitleViewContext = CoreDataStack.shared.container.viewContext.child()
   private let editTitleViewContext = CoreDataStack.shared.container.viewContext.child()

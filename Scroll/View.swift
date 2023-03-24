@@ -33,7 +33,3 @@ extension LabeledContentStyle where Self == TableLabeledContentStyle {
 enum FormPurpose {
   case create, edit
 }
-
-enum Navigation: Hashable {
-  case contents(Title)
-}

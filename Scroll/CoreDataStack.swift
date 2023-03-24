@@ -60,6 +60,7 @@ extension NSManagedObjectContext {
   func child() -> Self {
     let child = Self(concurrencyType: .mainQueueConcurrencyType)
     child.parent = self
+    child.automaticallyMergesChangesFromParent = true
 
     return child
   }
