@@ -21,9 +21,12 @@ struct TitleContentsView: View {
     // is often awkward. I think providing an option for the user to set whether or not the list should use cover images
     // would be an interesting solution. The only problem, then, is whether or not it should apply to all contents, a
     // subset (e.g. in a certain group), a rule, etc.
+    //
+    // Another approach may be to check the list and see if any of them have covers, and, if so, just display them all
+    // as covers instead.
     List {
       ForEach(contents) { content in
-        NavigationLink(value: content) {
+        NavigationLink(value: Navigation.content(content)) {
           Text(content.title!)
         }
       }.onDelete { indicies in

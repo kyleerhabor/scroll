@@ -34,7 +34,7 @@ struct DeleteTitleButtonView: View {
 }
 
 struct DeleteTitleButtonView_Previews: PreviewProvider {
-  static private let viewContext = CoreDataStack.preview.container.viewContext
+  private static let viewContext = CoreDataStack.preview.container.viewContext
 
   static var previews: some View {
     DeleteTitleButtonView(title: .init(context: viewContext))

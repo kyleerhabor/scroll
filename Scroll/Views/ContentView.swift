@@ -15,15 +15,19 @@ struct ContentView: View {
   )
   private var titles: FetchedResults<Title>
 
+  @State private var navigator: [Navigation] = []
+  // On macOS, this seems to not have effect. Maybe on iOS?
+  @SceneStorage("navigation") private var navigation: Data?
+
   var body: some View {
-    NavigationStack {
+    NavigationStack(path: $navigator) {
       // Maybe a generic list should be used? But that may look worse... Maybe just on screens that are smaller? (iOS)
       ScrollView {
         let width: CGFloat = 128
 
         LazyVGrid(columns: [.init(.adaptive(minimum: width))]) {
           ForEach(titles) { title in
-            NavigationLink(value: title) {
+            NavigationLink(value: Navigation.title(title)) {
               // For some reason, the blue outline (highlight) is sometimes wider than the view by a variable amount.
               //
               // The default spacing is a bit much; 4 is too much, and 2 is a bit too short. 3 looks "fine".
@@ -41,7 +45,7 @@ struct ContentView: View {
                 // Abyss: The Golden City of the Scorching Sun"), but is "just right" for how much space it occupies.
                 Group {
                   if let qualifier {
-                    Text(name) + Text(verbatim: " ") + Text(qualifier).foregroundColor(.secondary)
+                    Text("\(name) \(Text(qualifier).foregroundColor(.secondary))")
                   } else {
                     Text(name)
                   }
@@ -61,21 +65,31 @@ struct ContentView: View {
         }.padding()
       }
       .navigationTitle("Titles")
-      .navigationDestination(for: Title.self) { title in
-        TitleView(title: title)
-      }.navigationDestination(for: Content.self) { content in
-        TContentView(content: content)
+      .navigationDestination(for: Navigation.self) { nav in
+        switch nav {
+          case .home: Self()
+          case .title(let title): TitleView(title: title)
+          case .content(let content): TContentView(content: content)
+        }
       }.toolbar {
         // In the future, I'd like to provide users the ability to create or *import* titles (likely in some file format).
         // When that happens, this will likely be a Menu.
         CreateTitleButtonView()
       }
-    }
-  }
-}
+    }.onAppear {
+      if let navigation {
+        let decoder = JSONDecoder()
 
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
+        if let nav = try? decoder.decode([Navigation].self, from: navigation) {
+          self.navigator = nav
+        }
+      }
+    }.onChange(of: navigator) { nav in
+      let encoder = JSONEncoder()
+
+      if let encoded = try? encoder.encode(nav) {
+        navigation = encoded
+      }
+    }
   }
 }

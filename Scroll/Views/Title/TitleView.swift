@@ -34,15 +34,6 @@ struct TitleView: View {
             }
             .buttonStyle(.plain)
             .focusable(false)
-            .onChange(of: title.cover) { cover in
-              self.cover = cover
-            }.onChange(of: cover) { cover in
-              title.cover = cover
-
-              if case .failure = viewContext.save() {
-                didErrorUpdatingCover = true
-              }
-            }
 
             VStack(spacing: 4) {
               if let contents = title.contents {
@@ -70,7 +61,7 @@ struct TitleView: View {
           VStack(alignment: .leading) {
             VStack(spacing: 1) {
               Group {
-                TextField(text: $name, prompt: Text("Title"), axis: .vertical) {}
+                TextField("Title", text: $name, prompt: Text("Title"), axis: .vertical)
                   .font(.title)
                   .onSubmit {
                     let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -90,12 +81,10 @@ struct TitleView: View {
                     if case .failure = viewContext.save() {
                       didErrorUpdatingTitle = true
                     }
-                  }.onChange(of: title.title) { title in
-                    self.name = title ?? ""
                   }
 
                 if alwaysShowTitleQualifier || title.qualifier?.isEmpty == false {
-                  TextField(text: $qualifier, prompt: Text("Qualifier"), axis: .vertical) {}
+                  TextField("Qualifier", text: $qualifier, prompt: Text("Qualifier"), axis: .vertical)
                     .font(.title3)
                     .foregroundColor(.secondary)
                     .onSubmit {
@@ -116,9 +105,6 @@ struct TitleView: View {
               .focusable(false)
               .textFieldStyle(.plain)
               .bold()
-              .onChange(of: title.qualifier) { qualifier in
-                self.qualifier = qualifier ?? ""
-              }
             }
 
             if let desc = title.desc {
@@ -160,6 +146,32 @@ struct TitleView: View {
       name = title.title ?? ""
       qualifier = title.qualifier ?? ""
       cover = title.cover
+    }.onChange(of: cover) { cover in
+      title.cover = cover
+
+      if case .failure = viewContext.save() {
+        didErrorUpdatingCover = true
+      }
+    }.onChange(of: title.title) { title in
+      self.name = title ?? ""
+    }.onChange(of: title.qualifier) { qualifier in
+      self.qualifier = qualifier ?? ""
+    }.onChange(of: title.cover) { cover in
+      self.cover = cover
     }
+  }
+}
+
+struct TitleView_Previews: PreviewProvider {
+  static private let context = CoreDataStack.preview.container.viewContext
+  static private let title: Title = {
+    let title = Title(context: context)
+    title.title = "Crest of the Stars"
+
+    return title
+  }()
+
+  static var previews: some View {
+    TitleView(title: title)
   }
 }
