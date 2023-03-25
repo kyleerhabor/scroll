@@ -26,11 +26,7 @@ struct ScrollApp: App {
       CreateTitleFormView()
         // I need to create some kind of store to hold these.
         .environment(\.managedObjectContext, createTitleViewContext)
-        .onDisappear {
-          if viewContext.hasChanges {
-            _ = try? viewContext.save() as Void
-          }
-        }
+        .onDisappear { saveChanges() }
     }
 
     // For views where the ID is nil (seems to be from restoration not being possible; don't know how), I'd like to show
@@ -40,11 +36,7 @@ struct ScrollApp: App {
       if let id {
         EditTitleFormView(id: id)
           .environment(\.managedObjectContext, editTitleViewContext)
-          .onDisappear {
-            if viewContext.hasChanges {
-              _ = try? viewContext.save() as Void
-            }
-          }
+          .onDisappear { saveChanges() }
       }
     }.commandsRemoved()
 
@@ -66,11 +58,18 @@ struct ScrollApp: App {
       if let id {
         CreateEntryFormView(contentId: id)
           .environment(\.managedObjectContext, createEntryViewContext)
+          .onDisappear { saveChanges() }
       }
     }.commandsRemoved()
 
     Settings {
       SettingsView()
+    }
+  }
+
+  func saveChanges() {
+    if viewContext.hasChanges {
+      _ = try? viewContext.save() as Void
     }
   }
 }

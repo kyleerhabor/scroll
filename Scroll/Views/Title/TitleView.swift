@@ -123,7 +123,7 @@ struct TitleView: View {
 
           TitleContentsView(title: title)
             .listStyle(.plain)
-            .frame(height: min(CGFloat(total * 24), 12 * 24)) // At most, ~12
+            .frame(height: min(CGFloat(total) * 24, 12 * 24)) // At most, ~12
             .cornerRadius(6)
         }
       }.padding()

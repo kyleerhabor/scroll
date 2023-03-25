@@ -34,6 +34,10 @@
 		007ECE3829C127E300286ED5 /* TContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007ECE3729C127E300286ED5 /* TContentView.swift */; };
 		007ECE3A29C12B3200286ED5 /* DeleteContentButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007ECE3929C12B3200286ED5 /* DeleteContentButtonView.swift */; };
 		007ECE3E29C14DC900286ED5 /* CreateEntryButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007ECE3D29C14DC900286ED5 /* CreateEntryButtonView.swift */; };
+		0082B6E329CF5A6300F351E3 /* ContentEntriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082B6E229CF5A6200F351E3 /* ContentEntriesView.swift */; };
+		0082B6EA29CF5C3000F351E3 /* Content+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082B6E829CF5C3000F351E3 /* Content+CoreDataClass.swift */; };
+		0082B6EB29CF5C3000F351E3 /* Content+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082B6E929CF5C3000F351E3 /* Content+CoreDataProperties.swift */; };
+		0082B6EF29CF6DEB00F351E3 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082B6EE29CF6DEB00F351E3 /* EntryView.swift */; };
 		0082BFC529B41AC300C35E79 /* ScrollApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFC429B41AC300C35E79 /* ScrollApp.swift */; };
 		0082BFC729B41AC300C35E79 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFC629B41AC300C35E79 /* CoreDataStack.swift */; };
 		0082BFCA29B41AC300C35E79 /* Scroll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFC829B41AC300C35E79 /* Scroll.xcdatamodeld */; };
@@ -97,6 +101,10 @@
 		007ECE3729C127E300286ED5 /* TContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TContentView.swift; sourceTree = "<group>"; };
 		007ECE3929C12B3200286ED5 /* DeleteContentButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteContentButtonView.swift; sourceTree = "<group>"; };
 		007ECE3D29C14DC900286ED5 /* CreateEntryButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEntryButtonView.swift; sourceTree = "<group>"; };
+		0082B6E229CF5A6200F351E3 /* ContentEntriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentEntriesView.swift; sourceTree = "<group>"; };
+		0082B6E829CF5C3000F351E3 /* Content+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Content+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0082B6E929CF5C3000F351E3 /* Content+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Content+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0082B6EE29CF6DEB00F351E3 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		0082BFC129B41AC300C35E79 /* Scroll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scroll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0082BFC429B41AC300C35E79 /* ScrollApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollApp.swift; sourceTree = "<group>"; };
 		0082BFC629B41AC300C35E79 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -181,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				007ECE3729C127E300286ED5 /* TContentView.swift */,
+				0082B6E229CF5A6200F351E3 /* ContentEntriesView.swift */,
 				000E780229BEA6C600FF4679 /* Button */,
 				0004CED729C0254000D1DBE9 /* Form */,
 			);
@@ -202,6 +211,8 @@
 			children = (
 				000F2D6529C3C07600B83815 /* Title+CoreDataClass.swift */,
 				000F2D6629C3C07600B83815 /* Title+CoreDataProperties.swift */,
+				0082B6E829CF5C3000F351E3 /* Content+CoreDataClass.swift */,
+				0082B6E929CF5C3000F351E3 /* Content+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -215,6 +226,7 @@
 				000F2D5E29C3893A00B83815 /* TitleCoverStyleModifier.swift */,
 				000E780029BE857900FF4679 /* Button */,
 				0004CED629BFC15800D1DBE9 /* Form */,
+				0082B6F029CF6F1700F351E3 /* Entry */,
 			);
 			path = Title;
 			sourceTree = "<group>";
@@ -222,6 +234,7 @@
 		007ECE3B29C149C100286ED5 /* Entry */ = {
 			isa = PBXGroup;
 			children = (
+				0082B6EE29CF6DEB00F351E3 /* EntryView.swift */,
 				007ECE3C29C14A5100286ED5 /* Button */,
 				007ECE3F29C14F4F00286ED5 /* Form */,
 			);
@@ -245,6 +258,13 @@
 				000F2D7429C52F2C00B83815 /* CreateEntryFormView.swift */,
 			);
 			path = Form;
+			sourceTree = "<group>";
+		};
+		0082B6F029CF6F1700F351E3 /* Entry */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entry;
 			sourceTree = "<group>";
 		};
 		0082BFB829B41AC200C35E79 = {
@@ -467,6 +487,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0082B6E329CF5A6300F351E3 /* ContentEntriesView.swift in Sources */,
 				000F2D6729C3C07600B83815 /* Title+CoreDataClass.swift in Sources */,
 				000E780629BEA95000FF4679 /* ContentFormView.swift in Sources */,
 				000F2D7529C52F2C00B83815 /* CreateEntryFormView.swift in Sources */,
@@ -477,6 +498,7 @@
 				00FA011429CA397800CAF422 /* SettingsView.swift in Sources */,
 				00FA010629C9290400CAF422 /* ModifiableImageView.swift in Sources */,
 				007ECE3E29C14DC900286ED5 /* CreateEntryButtonView.swift in Sources */,
+				0082B6EF29CF6DEB00F351E3 /* EntryView.swift in Sources */,
 				0063765529BD931C001EBA44 /* Model.swift in Sources */,
 				0004CEDE29C0369400D1DBE9 /* EditContentFormView.swift in Sources */,
 				0063764C29BA954B001EBA44 /* TitleCoverView.swift in Sources */,
@@ -495,6 +517,8 @@
 				0082BFCA29B41AC300C35E79 /* Scroll.xcdatamodeld in Sources */,
 				00FA010829C9517600CAF422 /* TitleFormCoverView.swift in Sources */,
 				000F2D7929C5F6DF00B83815 /* EntryFormChapterView.swift in Sources */,
+				0082B6EA29CF5C3000F351E3 /* Content+CoreDataClass.swift in Sources */,
+				0082B6EB29CF5C3000F351E3 /* Content+CoreDataProperties.swift in Sources */,
 				007ECE3829C127E300286ED5 /* TContentView.swift in Sources */,
 				000F2D6829C3C07600B83815 /* Title+CoreDataProperties.swift in Sources */,
 				000F2D6D29C4D8A200B83815 /* EntryFormView.swift in Sources */,

@@ -35,7 +35,7 @@ enum FormPurpose {
 }
 
 enum Navigation: Hashable, Codable {
-  case home, title(Title), content(Content)
+  case home, title(Title), content(Content), entry(Entry)
 
   init(from decoder: Decoder) throws {
     let container = try decoder.singleValueContainer()
@@ -50,6 +50,10 @@ enum Navigation: Hashable, Codable {
           return
         case let content as Content:
           self = .content(content)
+
+          return
+        case let entry as Entry:
+          self = .entry(entry)
 
           return
         default: // I don't know why I can't use @unknown here.
@@ -67,6 +71,7 @@ enum Navigation: Hashable, Codable {
       case .home: try container.encode("home")
       case .title(let title): try container.encode(title.id)
       case .content(let content): try container.encode(content.id)
+      case .entry(let entry): try container.encode(entry.id)
     }
   }
 }

@@ -83,3 +83,9 @@ extension Content {
     }
   }
 }
+
+extension Entry {
+  public var id: URL {
+    self.objectID.uriRepresentation()
+  }
+}

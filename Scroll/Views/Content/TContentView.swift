@@ -20,7 +20,7 @@ struct TContentView: View { // T[itle]ContentView to not conflict with ContentVi
 
     ScrollView {
       VStack(alignment: .leading, spacing: 0) {
-        TextField(text: $title, prompt: Text("Title")) {}
+        TextField("Title", text: $title, prompt: Text("Title"))
           .textFieldStyle(.plain)
           .font(.title)
           .bold()
@@ -53,7 +53,7 @@ struct TContentView: View { // T[itle]ContentView to not conflict with ContentVi
                   if let duration = content.episode?.duration {
                     let dur = Duration.seconds(duration)
 
-                    Text(dur.formatted(.time(pattern: dur.length())))
+                    Text(dur.formatted(.time(pattern: dur.pattern())))
                   }
                 case .chapter:
                   if let pages = content.chapter?.pages {
@@ -67,8 +67,19 @@ struct TContentView: View { // T[itle]ContentView to not conflict with ContentVi
           .textSelection(.enabled)
 
           if let description = content.desc {
+            // TODO: Add a line limit which displays a "show more" text if exceeded (like DisclosureGroup, but better).
             Text(description)
               .textSelection(.enabled)
+          }
+
+          if let total = content.entries?.count, total > 0 {
+            Text("Entries")
+              .font(.title2)
+              .fontWeight(.semibold)
+
+            ContentEntriesView(content: content)
+              .listStyle(.plain)
+              .frame(height: CGFloat(total) * 24)
           }
         }
       }.padding()
@@ -76,10 +87,9 @@ struct TContentView: View { // T[itle]ContentView to not conflict with ContentVi
     .navigationTitle(title)
     .navigationSubtitle(content.titleRef?.name ?? "")
     .toolbar {
-      ToolbarItemGroup {
-        EditContentButtonView(id: content.id)
-        DeleteContentButtonView(content: content)
-      }
+      EditContentButtonView(id: content.id)
+      DeleteContentButtonView(content: content)
+      CreateEntryButtonView(contentId: content.id)
     }
     .alert("Could not update title.", isPresented: $didErrorUpdatingTitle) {}
     .onAppear {

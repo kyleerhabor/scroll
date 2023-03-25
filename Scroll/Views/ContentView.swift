@@ -16,7 +16,7 @@ struct ContentView: View {
   private var titles: FetchedResults<Title>
 
   @State private var navigator: [Navigation] = []
-  // On macOS, this seems to not have effect. Maybe on iOS?
+  // On macOS, this seems to not have an effect. Maybe on iOS?
   @SceneStorage("navigation") private var navigation: Data?
 
   var body: some View {
@@ -70,6 +70,7 @@ struct ContentView: View {
           case .home: Self()
           case .title(let title): TitleView(title: title)
           case .content(let content): TContentView(content: content)
+          case .entry(let entry): EntryView(entry: entry)
         }
       }.toolbar {
         // In the future, I'd like to provide users the ability to create or *import* titles (likely in some file format).
