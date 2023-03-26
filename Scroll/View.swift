@@ -35,7 +35,7 @@ enum FormPurpose {
 }
 
 enum Navigation: Hashable, Codable {
-  case home, title(Title), content(Content), entry(Entry)
+  case titles, lists, title(Title), content(Content), entry(Entry)
 
   init(from decoder: Decoder) throws {
     let container = try decoder.singleValueContainer()
@@ -61,14 +61,22 @@ enum Navigation: Hashable, Codable {
       }
     }
 
-    self = .home
+    if let string = try? container.decode(String.self),
+       string == "lists" {
+      self = .lists
+
+      return
+    }
+
+    self = .titles
   }
 
   func encode(to encoder: Encoder) throws {
     var container = encoder.singleValueContainer()
 
     switch self {
-      case .home: try container.encode("home")
+      case .titles: try container.encode("titles")
+      case .lists: try container.encode("lists")
       case .title(let title): try container.encode(title.id)
       case .content(let content): try container.encode(content.id)
       case .entry(let entry): try container.encode(entry.id)

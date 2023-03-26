@@ -38,6 +38,8 @@
 		0082B6EA29CF5C3000F351E3 /* Content+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082B6E829CF5C3000F351E3 /* Content+CoreDataClass.swift */; };
 		0082B6EB29CF5C3000F351E3 /* Content+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082B6E929CF5C3000F351E3 /* Content+CoreDataProperties.swift */; };
 		0082B6EF29CF6DEB00F351E3 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082B6EE29CF6DEB00F351E3 /* EntryView.swift */; };
+		0082B6F229CFC4E100F351E3 /* TitlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082B6F129CFC4E100F351E3 /* TitlesView.swift */; };
+		0082B6F429CFC59600F351E3 /* ListsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082B6F329CFC59600F351E3 /* ListsView.swift */; };
 		0082BFC529B41AC300C35E79 /* ScrollApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFC429B41AC300C35E79 /* ScrollApp.swift */; };
 		0082BFC729B41AC300C35E79 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFC629B41AC300C35E79 /* CoreDataStack.swift */; };
 		0082BFCA29B41AC300C35E79 /* Scroll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFC829B41AC300C35E79 /* Scroll.xcdatamodeld */; };
@@ -105,6 +107,8 @@
 		0082B6E829CF5C3000F351E3 /* Content+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Content+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0082B6E929CF5C3000F351E3 /* Content+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Content+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0082B6EE29CF6DEB00F351E3 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
+		0082B6F129CFC4E100F351E3 /* TitlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlesView.swift; sourceTree = "<group>"; };
+		0082B6F329CFC59600F351E3 /* ListsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsView.swift; sourceTree = "<group>"; };
 		0082BFC129B41AC300C35E79 /* Scroll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scroll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0082BFC429B41AC300C35E79 /* ScrollApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollApp.swift; sourceTree = "<group>"; };
 		0082BFC629B41AC300C35E79 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -224,6 +228,7 @@
 				0004EB6629C7A1F2005BB807 /* TitleContentsView.swift */,
 				0063764B29BA954B001EBA44 /* TitleCoverView.swift */,
 				000F2D5E29C3893A00B83815 /* TitleCoverStyleModifier.swift */,
+				0082B6F129CFC4E100F351E3 /* TitlesView.swift */,
 				000E780029BE857900FF4679 /* Button */,
 				0004CED629BFC15800D1DBE9 /* Form */,
 				0082B6F029CF6F1700F351E3 /* Entry */,
@@ -341,6 +346,7 @@
 				000F2D6E29C4EFAB00B83815 /* HiddenView.swift */,
 				0004CED129BEE8EC00D1DBE9 /* FormControlView.swift */,
 				00FA010529C9290400CAF422 /* ModifiableImageView.swift */,
+				0082B6F329CFC59600F351E3 /* ListsView.swift */,
 				000E780129BEA6B400FF4679 /* Content */,
 				007ECE3B29C149C100286ED5 /* Entry */,
 				00FA011629CA743B00CAF422 /* Settings */,
@@ -495,6 +501,7 @@
 				0060268B29CC0C2700E2D62B /* StateView.swift in Sources */,
 				000F2D7129C4EFF700B83815 /* DataView.swift in Sources */,
 				00FA010A29C9571E00CAF422 /* CreateTitleFormView.swift in Sources */,
+				0082B6F429CFC59600F351E3 /* ListsView.swift in Sources */,
 				00FA011429CA397800CAF422 /* SettingsView.swift in Sources */,
 				00FA010629C9290400CAF422 /* ModifiableImageView.swift in Sources */,
 				007ECE3E29C14DC900286ED5 /* CreateEntryButtonView.swift in Sources */,
@@ -520,6 +527,7 @@
 				0082B6EA29CF5C3000F351E3 /* Content+CoreDataClass.swift in Sources */,
 				0082B6EB29CF5C3000F351E3 /* Content+CoreDataProperties.swift in Sources */,
 				007ECE3829C127E300286ED5 /* TContentView.swift in Sources */,
+				0082B6F229CFC4E100F351E3 /* TitlesView.swift in Sources */,
 				000F2D6829C3C07600B83815 /* Title+CoreDataProperties.swift in Sources */,
 				000F2D6D29C4D8A200B83815 /* EntryFormView.swift in Sources */,
 				0063765B29BE4C1C001EBA44 /* DeleteTitleButtonView.swift in Sources */,
