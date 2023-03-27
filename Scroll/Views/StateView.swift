@@ -35,7 +35,7 @@ struct StateView<Value, Error, Idle: View, Loading: View, Loaded: View, Failed: 
   }
 }
 
-typealias DefaultStateViewIdle = Color
+typealias DefaultStateViewIdle = HiddenView
 
 typealias DefaultStateViewLoading = ProgressView<EmptyView, EmptyView>
 
@@ -50,7 +50,7 @@ extension StateView where Idle == DefaultStateViewIdle {
     self.init(
       state: state,
       load: load,
-      idle: { Color.clear },
+      idle: { .init() },
       loading: loading,
       loaded: loaded,
       failed: failed
@@ -87,7 +87,7 @@ extension StateView where Idle == DefaultStateViewIdle, Loading == DefaultStateV
     self.init(
       state: state,
       load: load,
-      idle: { .clear },
+      idle: { .init() },
       loading: { .init() },
       loaded: loaded,
       failed: failed

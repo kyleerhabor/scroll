@@ -50,6 +50,11 @@
 		0082BFE629B41AC600C35E79 /* ScrollUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFE529B41AC600C35E79 /* ScrollUITests.swift */; };
 		0082BFE829B41AC600C35E79 /* ScrollUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFE729B41AC600C35E79 /* ScrollUITestsLaunchTests.swift */; };
 		0082BFF529B4613600C35E79 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0082BFF429B4613600C35E79 /* TitleView.swift */; };
+		00990EF929D1265A0044BEA2 /* EntryList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00990EF829D126530044BEA2 /* EntryList+CoreDataProperties.swift */; };
+		00990EFA29D1265A0044BEA2 /* EntryList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00990EF729D126530044BEA2 /* EntryList+CoreDataClass.swift */; };
+		00994D3429D0E5600053E3CA /* ListPlanFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00994D3329D0E5600053E3CA /* ListPlanFormView.swift */; };
+		00994D3729D0E5930053E3CA /* CreateListPlanButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00994D3629D0E5930053E3CA /* CreateListPlanButtonView.swift */; };
+		00994D3929D0E8960053E3CA /* CreateListPlanFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00994D3829D0E8960053E3CA /* CreateListPlanFormView.swift */; };
 		00FA010029C90C6000CAF422 /* TitleFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FA00FF29C90C6000CAF422 /* TitleFormView.swift */; };
 		00FA010629C9290400CAF422 /* ModifiableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FA010529C9290400CAF422 /* ModifiableImageView.swift */; };
 		00FA010829C9517600CAF422 /* TitleFormCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FA010729C9517600CAF422 /* TitleFormCoverView.swift */; };
@@ -123,6 +128,11 @@
 		0082BFE529B41AC600C35E79 /* ScrollUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollUITests.swift; sourceTree = "<group>"; };
 		0082BFE729B41AC600C35E79 /* ScrollUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0082BFF429B4613600C35E79 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		00990EF729D126530044BEA2 /* EntryList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntryList+CoreDataClass.swift"; sourceTree = "<group>"; };
+		00990EF829D126530044BEA2 /* EntryList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntryList+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		00994D3329D0E5600053E3CA /* ListPlanFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPlanFormView.swift; sourceTree = "<group>"; };
+		00994D3629D0E5930053E3CA /* CreateListPlanButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateListPlanButtonView.swift; sourceTree = "<group>"; };
+		00994D3829D0E8960053E3CA /* CreateListPlanFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateListPlanFormView.swift; sourceTree = "<group>"; };
 		00DC480F29B7F97900CAB1AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00FA00FF29C90C6000CAF422 /* TitleFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleFormView.swift; sourceTree = "<group>"; };
 		00FA010529C9290400CAF422 /* ModifiableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiableImageView.swift; sourceTree = "<group>"; };
@@ -217,6 +227,8 @@
 				000F2D6629C3C07600B83815 /* Title+CoreDataProperties.swift */,
 				0082B6E829CF5C3000F351E3 /* Content+CoreDataClass.swift */,
 				0082B6E929CF5C3000F351E3 /* Content+CoreDataProperties.swift */,
+				00990EF729D126530044BEA2 /* EntryList+CoreDataClass.swift */,
+				00990EF829D126530044BEA2 /* EntryList+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -231,7 +243,6 @@
 				0082B6F129CFC4E100F351E3 /* TitlesView.swift */,
 				000E780029BE857900FF4679 /* Button */,
 				0004CED629BFC15800D1DBE9 /* Form */,
-				0082B6F029CF6F1700F351E3 /* Entry */,
 			);
 			path = Title;
 			sourceTree = "<group>";
@@ -263,13 +274,6 @@
 				000F2D7429C52F2C00B83815 /* CreateEntryFormView.swift */,
 			);
 			path = Form;
-			sourceTree = "<group>";
-		};
-		0082B6F029CF6F1700F351E3 /* Entry */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Entry;
 			sourceTree = "<group>";
 		};
 		0082BFB829B41AC200C35E79 = {
@@ -337,6 +341,32 @@
 			path = ScrollUITests;
 			sourceTree = "<group>";
 		};
+		00994D3129D0E4230053E3CA /* ListPlan */ = {
+			isa = PBXGroup;
+			children = (
+				00994D3529D0E5680053E3CA /* Button */,
+				00994D3229D0E5550053E3CA /* Form */,
+			);
+			path = ListPlan;
+			sourceTree = "<group>";
+		};
+		00994D3229D0E5550053E3CA /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				00994D3329D0E5600053E3CA /* ListPlanFormView.swift */,
+				00994D3829D0E8960053E3CA /* CreateListPlanFormView.swift */,
+			);
+			path = Form;
+			sourceTree = "<group>";
+		};
+		00994D3529D0E5680053E3CA /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				00994D3629D0E5930053E3CA /* CreateListPlanButtonView.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
 		00DC480A29B7CDD400CAB1AB /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -349,6 +379,7 @@
 				0082B6F329CFC59600F351E3 /* ListsView.swift */,
 				000E780129BEA6B400FF4679 /* Content */,
 				007ECE3B29C149C100286ED5 /* Entry */,
+				00994D3129D0E4230053E3CA /* ListPlan */,
 				00FA011629CA743B00CAF422 /* Settings */,
 				0063765C29BE787A001EBA44 /* Title */,
 			);
@@ -506,6 +537,8 @@
 				00FA010629C9290400CAF422 /* ModifiableImageView.swift in Sources */,
 				007ECE3E29C14DC900286ED5 /* CreateEntryButtonView.swift in Sources */,
 				0082B6EF29CF6DEB00F351E3 /* EntryView.swift in Sources */,
+				00990EFA29D1265A0044BEA2 /* EntryList+CoreDataClass.swift in Sources */,
+				00994D3429D0E5600053E3CA /* ListPlanFormView.swift in Sources */,
 				0063765529BD931C001EBA44 /* Model.swift in Sources */,
 				0004CEDE29C0369400D1DBE9 /* EditContentFormView.swift in Sources */,
 				0063764C29BA954B001EBA44 /* TitleCoverView.swift in Sources */,
@@ -522,6 +555,7 @@
 				0082BFCC29B41AC300C35E79 /* ContentView.swift in Sources */,
 				00FA010029C90C6000CAF422 /* TitleFormView.swift in Sources */,
 				0082BFCA29B41AC300C35E79 /* Scroll.xcdatamodeld in Sources */,
+				00990EF929D1265A0044BEA2 /* EntryList+CoreDataProperties.swift in Sources */,
 				00FA010829C9517600CAF422 /* TitleFormCoverView.swift in Sources */,
 				000F2D7929C5F6DF00B83815 /* EntryFormChapterView.swift in Sources */,
 				0082B6EA29CF5C3000F351E3 /* Content+CoreDataClass.swift in Sources */,
@@ -537,6 +571,8 @@
 				00FA010C29C957F900CAF422 /* EditTitleFormView.swift in Sources */,
 				000E780A29BEB45700FF4679 /* CreateContentFormView.swift in Sources */,
 				000F2D7729C5655500B83815 /* EntryFormEpisodeView.swift in Sources */,
+				00994D3929D0E8960053E3CA /* CreateListPlanFormView.swift in Sources */,
+				00994D3729D0E5930053E3CA /* CreateListPlanButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

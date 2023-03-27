@@ -18,6 +18,7 @@
         <relationship name="chapter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryChapter" inverseName="entry" inverseEntity="EntryChapter"/>
         <relationship name="content" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Content" inverseName="entries" inverseEntity="Content"/>
         <relationship name="episode" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryEpisode" inverseName="entry" inverseEntity="EntryEpisode"/>
+        <relationship name="list" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EntryList" inverseName="entries" inverseEntity="EntryList"/>
     </entity>
     <entity name="EntryChapter" representedClassName="EntryChapter" syncable="YES" codeGenerationType="class">
         <attribute name="progress" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -26,6 +27,10 @@
     <entity name="EntryEpisode" representedClassName="EntryEpisode" syncable="YES" codeGenerationType="class">
         <attribute name="progress" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="entry" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Entry" inverseName="episode" inverseEntity="Entry"/>
+    </entity>
+    <entity name="EntryList" representedClassName="EntryList" syncable="YES">
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <relationship name="entries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Entry" inverseName="list" inverseEntity="Entry"/>
     </entity>
     <entity name="Episode" representedClassName="Episode" syncable="YES" codeGenerationType="class">
         <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>

@@ -136,8 +136,12 @@ struct TitleView: View {
 
       Menu {
         CreateContentButtonView(titleId: title.id)
+
+        if let contents = title.contents, !contents.isEmpty {
+          CreateListPlanButtonView(contents: contents.map(\.id))
+        }
       } label: {
-        Label("Add", systemImage: "plus")
+        Label("Create", systemImage: "plus")
       }
     }
     .alert("Could not update title", isPresented: $didErrorUpdatingTitle) {}

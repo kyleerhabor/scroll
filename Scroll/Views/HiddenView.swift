@@ -9,9 +9,7 @@ import SwiftUI
 
 struct HiddenView: View {
   var body: some View {
-    // EmptyView does not work when paired with .onAppear. Why Rectangle? Just felt like it.
-    Rectangle()
-      .hidden()
+    Color.clear
   }
 }
 

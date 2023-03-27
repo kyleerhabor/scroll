@@ -9,15 +9,20 @@ import SwiftUI
 
 @main
 struct ScrollApp: App {
-  private let viewContext = CoreDataStack.shared.container.viewContext
-  private let createTitleViewContext = CoreDataStack.shared.container.viewContext.child()
-  private let editTitleViewContext = CoreDataStack.shared.container.viewContext.child()
-  private let createEntryViewContext = CoreDataStack.shared.container.viewContext.child()
+  private let viewContext = getViewContext()
+  private let createTitleViewContext = getViewContext().child()
+  private let editTitleViewContext = getViewContext().child()
+  private let createEntryViewContext = getViewContext().child()
+  private let createListPlanViewContext = getViewContext().child()
 
   var body: some Scene {
     WindowGroup {
       ContentView()
         .environment(\.managedObjectContext, viewContext)
+    }
+
+    Settings {
+      SettingsView()
     }
 
     // Note that every Entity.ID is a URL, so the preceding identifier actually needs to be unique for each type.
@@ -26,7 +31,7 @@ struct ScrollApp: App {
       CreateTitleFormView()
         // I need to create some kind of store to hold these.
         .environment(\.managedObjectContext, createTitleViewContext)
-        .onDisappear { saveChanges() }
+        .onDisappear(perform: saveChanges)
     }
 
     // For views where the ID is nil (seems to be from restoration not being possible; don't know how), I'd like to show
@@ -36,7 +41,7 @@ struct ScrollApp: App {
       if let id {
         EditTitleFormView(id: id)
           .environment(\.managedObjectContext, editTitleViewContext)
-          .onDisappear { saveChanges() }
+          .onDisappear(perform: saveChanges)
       }
     }.commandsRemoved()
 
@@ -58,13 +63,25 @@ struct ScrollApp: App {
       if let id {
         CreateEntryFormView(contentId: id)
           .environment(\.managedObjectContext, createEntryViewContext)
-          .onDisappear { saveChanges() }
+          .onDisappear(perform: saveChanges)
       }
     }.commandsRemoved()
 
-    Settings {
-      SettingsView()
+    WindowGroup("Create List Plan", id: "list-plan.create", for: [Content.ID].self) { $ids in
+      Group {
+        if let ids {
+          CreateListPlanFormView(contents: ids)
+        } else {
+          CreateListPlanFormView()
+        }
+      }
+      .environment(\.managedObjectContext, createListPlanViewContext)
+      .onDisappear(perform: saveChanges)
     }
+  }
+
+  static func getViewContext() -> NSManagedObjectContext {
+    CoreDataStack.shared.container.viewContext
   }
 
   func saveChanges() {

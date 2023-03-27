@@ -89,7 +89,12 @@ struct TContentView: View { // T[itle]ContentView to not conflict with ContentVi
     .toolbar {
       EditContentButtonView(id: content.id)
       DeleteContentButtonView(content: content)
-      CreateEntryButtonView(contentId: content.id)
+
+      Menu {
+        CreateListPlanButtonView(contents: [content.id])
+      } label: {
+        Label("Create", systemImage: "plus")
+      }
     }
     .alert("Could not update title.", isPresented: $didErrorUpdatingTitle) {}
     .onAppear {
