@@ -8,43 +8,45 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View { 
-  var body: some View {
-    NavigationStack {
-      ScrollView {
-        VStack {
-          GroupBox {
-            ListsView()
-              .frame(maxWidth: .infinity)
-          } label: {
-            Text("List")
-              .font(.title2)
-              .fontWeight(.semibold)
-          }
+struct ContentView: View {
+  @State private var sidebar: Navigation = .titles
 
-          GroupBox {
-            TitlesView()
-              .frame(maxWidth: .infinity)
-          } label: {
-            Text("Titles")
-              .font(.title2)
-              .fontWeight(.semibold)
-          }
-        }.scenePadding()
-      }.navigationDestination(for: Navigation.self) { nav in
-        switch nav {
-          case .titles: TitlesView()
-          case .lists: ListsView()
-          case .title(let title): TitleView(title: title)
-          case .content(let content): TContentView(content: content)
-          case .entry(let entry): EntryView(entry: entry)
+  var body: some View {
+    NavigationSplitView {
+      List(selection: $sidebar) {
+        NavigationLink(value: Navigation.titles) {
+          Label("Titles", systemImage: "t.square")
         }
-      }.toolbar {
-        Menu {
-          CreateTitleButtonView()
-          CreateListPlanButtonView()
-        } label: {
-          Label("Create", systemImage: "plus")
+
+        NavigationLink(value: Navigation.lists) {
+          Label("Lists", systemImage: "list.bullet.rectangle")
+        }
+      }
+    } detail: {
+      NavigationStack {
+        ScrollView {
+          Group {
+            switch sidebar {
+              case .titles: TitlesView()
+              case .lists: ListsView()
+              default: EmptyView()
+            }
+          }.scenePadding()
+        }.navigationDestination(for: Navigation.self) { nav in
+          switch nav {
+            case .titles: TitlesView()
+            case .lists: ListsView()
+            case .title(let title): TitleView(title: title)
+            case .content(let content): TContentView(content: content)
+            case .entry(let entry): EntryView(entry: entry)
+          }
+        }.toolbar {
+          Menu {
+            CreateTitleButtonView()
+            CreateListPlanButtonView()
+          } label: {
+            Label("Create", systemImage: "plus")
+          }
         }
       }
     }
