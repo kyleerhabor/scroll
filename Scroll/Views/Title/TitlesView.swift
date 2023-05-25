@@ -25,7 +25,9 @@ struct TitlesView: View {
           //
           // The default spacing is a bit much; 4 is too much, and 2 is a bit too short. 3 looks "fine".
           VStack(alignment: .leading, spacing: 3) {
-            TitleCoverView(cover: title.cover)
+            var isStale = false
+
+            TitleCoverView(url: try? .init(resolvingBookmarkData: title.cover!, bookmarkDataIsStale: &isStale))
               .frame(width: width, height: TitleCoverStyleModifier.height(from: width))
               .titleCoverStyle()
 

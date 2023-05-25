@@ -23,13 +23,13 @@ struct ModifiableImageView<Label>: View where Label: View {
     Button {
       isPresentingPicker = true
     } label: {
-      // I experimented with adding a stroked border of smooth dashes signaling that the view supported upload
-      // and thought it looked worse while making the view more complex for users. Simply changing opacity gives
-      // enough detail.
+      // I experimented with adding a stroked border of smooth (to signal that the image supported uploading) and
+      // thought it looked worse while being more complex. Simply changing the opacity with an animation does good.
       label()
       // 0.625 - x - 0.75
         .opacity(isHovering ? 0.6875 : 1)
         .onHover { isHovering = $0 }
+        // The edge is really dependent on the context...
         .popover(isPresented: $isPresentingPicker, arrowEdge: .trailing) {
           HStack {
             Button("Files") {
@@ -101,7 +101,7 @@ struct ModifiableImageView_Previews: PreviewProvider {
     ModifiableImageView(image: $cover, didError: $didError) {
       let width: CGFloat = 80
 
-      TitleCoverView(cover: cover)
+      TitleCoverView(url: nil)
         .frame(width: width, height: TitleCoverStyleModifier.height(from: width))
         .titleCoverStyle()
     }

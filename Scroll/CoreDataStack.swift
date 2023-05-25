@@ -11,10 +11,10 @@ struct CoreDataStack {
   static let shared = CoreDataStack()
   static let preview = CoreDataStack(inMemory: true)
 
-  let container: NSPersistentCloudKitContainer
+  let container: NSPersistentContainer
 
   init(inMemory: Bool = false) {
-    container = NSPersistentCloudKitContainer(name: "Scroll")
+    container = NSPersistentContainer(name: "Scroll")
 
     if inMemory {
       container.persistentStoreDescriptions.first!.url = .nullDevice

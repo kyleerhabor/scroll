@@ -14,8 +14,7 @@ struct TitleFormView: View {
   @ObservedObject var title: Title
   var purpose: FormPurpose
 
-  @State private var didError = false
-  @State private var didErrorUpdatingCover = false
+  @State private var didErrorOnSubmit = false
   @State private var coverViewContext: NSManagedObjectContext?
 
   var body: some View {
@@ -52,8 +51,28 @@ struct TitleFormView: View {
         title.uiQualifier = title.uiQualifier.trimmingCharacters(in: .whitespacesAndNewlines)
         title.uiDescription = title.uiDescription.trimmingCharacters(in: .whitespacesAndNewlines)
 
+        guard let url = bookmark() ?? createBookmark() else {
+          didErrorOnSubmit = true
+
+          return
+        }
+
+        do {
+          if let cover = title.cover {
+            try cover.write(to: url)
+          } else {
+            try FileManager.default.removeItem(at: url)
+          }
+        } catch let err {
+          print(err)
+
+          didErrorOnSubmit = true
+
+          return
+        }
+
         guard case .success = viewContext.save() else {
-          didError = true
+          didErrorOnSubmit = true
 
           return
         }
@@ -62,10 +81,11 @@ struct TitleFormView: View {
       } cancel: {
         viewContext.rollback()
         dismiss()
-      }.alert(submitLabel(), isPresented: $didError) {}
+      }
     }
     .formStyle(.grouped)
     .navigationTitle(titleLabel())
+    .alert(submitLabel(), isPresented: $didErrorOnSubmit) {}
   }
 
   func titleLabel() -> String {
@@ -84,6 +104,46 @@ struct TitleFormView: View {
 
   func isComplete() -> Bool {
     !title.uiTitleLabel.isEmpty
+  }
+
+  func bookmark() -> URL? {
+    guard let bookmark = title.cover else {
+      return nil
+    }
+
+    var stale = false
+
+    guard let url = try? URL(resolvingBookmarkData: bookmark, bookmarkDataIsStale: &stale), !stale else {
+      return nil
+    }
+
+    return url
+  }
+
+  func createBookmark() -> URL? {
+    guard let documents = try? FileManager.default.url(
+      for: .documentDirectory,
+      in: .userDomainMask,
+      appropriateFor: nil,
+      create: false
+    ) else {
+      return nil
+    }
+
+    let path = documents.appending(components: "covers", UUID().uuidString)
+
+    do {
+      try FileManager.default.createDirectory(at: path.deletingLastPathComponent(), withIntermediateDirectories: true)
+      try Data().write(to: path)
+
+      let data = try path.bookmarkData()
+
+      title.cover = data
+    } catch {
+      return nil
+    }
+
+    return path
   }
 }
 

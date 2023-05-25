@@ -28,7 +28,9 @@ struct TitleView: View {
 
           VStack {
             ModifiableImageView(image: $cover, didError: $didErrorUpdatingCover) {
-              TitleCoverView(cover: title.cover)
+              var isStale = false
+
+              TitleCoverView(url: try? .init(resolvingBookmarkData: title.cover!, bookmarkDataIsStale: &isStale))
                 .frame(width: width, height: TitleCoverStyleModifier.height(from: width))
                 .titleCoverStyle()
             }

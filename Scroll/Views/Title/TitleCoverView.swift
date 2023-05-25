@@ -8,17 +8,31 @@
 import SwiftUI
 
 struct TitleCoverView: View {
-  var cover: Data?
+  // Images are primarily saved as Data for Core Data, but it's problematic since there's no clear way to get a URL to
+  // that image: only its binary data format, which isn't good to be loading on the main thread as an image. I think
+  // I'll need to save the image separately while holding a URL (as a bookmark) so it can be fed into AsyncImage.
+  var url: URL?
 
   var body: some View {
-    if let data = cover,
-       let image = NSImage(data: data) {
-      // It would maybe be nice to use an AsyncImage here to not block the UI, but I can't convert Data to URL.
-      Image(nsImage: image)
+//    AsyncImage(url: url) { phase in
+//      switch phase {
+//        case .success(let image):
+//          image
+//            .resizable()
+//            .scaledToFill()
+//        case .failure(let err):
+//          Color.red
+//            .onAppear { print(err) }
+//        default:
+//          Color(.clear)
+//            .background(.tertiary)
+//      }
+//    }
+    AsyncImage(url: url) { image in
+      image
         .resizable()
-        .scaledToFill() // Crop the parts that don't fit with .clipped(:)
-    } else {
-      // A hack I personally don't like, but it's better than a non-cross platform NSColor.tertiaryLabelColor
+        .scaledToFill()
+    } placeholder: {
       Color(.clear)
         .background(.tertiary)
     }

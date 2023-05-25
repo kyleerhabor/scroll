@@ -14,15 +14,19 @@ struct TitleFormCoverView: View {
   @ObservedObject var title: Title
 
   @State private var didError = false
+  @State private var isStale = false
 
   var body: some View {
     let width: CGFloat = 224 // 192 - 256
 
     VStack(spacing: 16) {
       ModifiableImageView(image: $title.cover, didError: $didError) {
-        TitleCoverView(cover: title.cover)
+        TitleCoverView(url: try? .init(resolvingBookmarkData: title.cover!, bookmarkDataIsStale: &isStale))
           .frame(width: width, height: TitleCoverStyleModifier.height(from: width))
           .titleCoverStyle()
+          .onChange(of: isStale) { stale in
+            print(stale)
+          }
       }.focusable(false)
 
       HStack {
@@ -48,9 +52,3 @@ struct TitleFormCoverView: View {
     .alert("Could not save cover.", isPresented: $didError) {}
   }
 }
-
-//struct TitleFormCoverView_Previews: PreviewProvider {
-//  static var previews: some View {
-//    TitleFormCoverView(title: <#Title#>, cover: <#Binding<Data?>#>)
-//  }
-//}

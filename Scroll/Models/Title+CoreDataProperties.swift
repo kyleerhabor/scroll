@@ -18,7 +18,7 @@ extension Title {
   @NSManaged public var desc: String?
   @NSManaged public var title: String?
   @NSManaged public var qualifier: String?
-  @NSManaged public var contents: Set<Content>? // ...
+  @NSManaged public var contents: Set<Content>?
 }
 
 // MARK: Generated accessors for contents
